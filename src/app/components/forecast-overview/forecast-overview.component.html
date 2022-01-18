@@ -1,0 +1,145 @@
+<section class="section__container">
+  <article class="weather__container">
+    <div class="title__container">
+      <div class="city__info">
+        <h2>Luxembourg City</h2>
+        <p>US</p>
+      </div>
+      <p class="weather__date">Jan 18, 2022</p>
+      <div class="weather__icon">
+        <i class="wi wi-night-sleet"></i>
+        <h3 class="weather__status">Rainy</h3>
+      </div>
+    </div>
+    <div class="weather__info">
+      <h2>7°C</h2>
+      <p>
+        <span class="lowest_temperature">9°C</span>
+        <span class="temperature__limiter">/</span>
+        <span class="highest_temperature">18°C</span>
+      </p>
+    </div>
+  </article>
+  <article class="weather__details__container">
+    <ul class="forecast">
+      <li>
+        <h5>Mon</h5>
+        <i class="wi wi-night-sleet"></i>
+        <p>
+          <span class="lowest_temperature">9°C</span> /
+          <span class="highest_temperature">18°C</span>
+        </p>
+      </li>
+      <li>
+        <h5>Tue</h5>
+        <i class="wi wi-night-sleet"></i>
+        <p>
+          <span class="lowest_temperature">9°C</span> /
+          <span class="highest_temperature">18°C</span>
+        </p>
+      </li>
+      <li>
+        <h5>Web</h5>
+        <i class="wi wi-night-sleet"></i>
+        <p>
+          <span class="lowest_temperature">9°C</span> /
+          <span class="highest_temperature">18°C</span>
+        </p>
+      </li>
+      <li>
+        <h5>Thur</h5>
+        <i class="wi wi-night-sleet"></i>
+        <p>
+          <span class="lowest_temperature">9°C</span> /
+          <span class="highest_temperature">18°C</span>
+        </p>
+      </li>
+      <li>
+        <h5>Fri</h5>
+        <i class="wi wi-night-sleet"></i>
+        <p>
+          <span class="lowest_temperature">9°C</span> /
+          <span class="highest_temperature">18°C</span>
+        </p>
+      </li>
+    </ul>
+  </article>
+  <div
+    (click)="showDetails = !showDetails"
+    class="toggler__details"
+    [ngClass]="showDetails ? 'to__opposite' : 'to__forward'"
+  ></div>
+</section>
+<section
+  class="section__container__details"
+  [ngClass]="
+    showDetails
+      ? 'section__container__details-display'
+      : 'section__container__details-hide'
+  "
+>
+  <article class="details__container">
+    <div class="description__container">
+      <div class="description__icon">
+        <i class="wi wi-day-sunny"></i>
+      </div>
+      <div class="description__text">
+        <p>Description of the weather</p>
+        <span>The high will be 8°C, the low will be 3°C</span>
+      </div>
+    </div>
+    <div class="alert__container">
+      <span>Last Alert : </span>
+      <span>Alert from the model</span>
+    </div>
+    <div class="details__data">
+      <ul class="details__list">
+        <li><i class="wi wi-hail"></i>&nbsp; <span>0%</span></li>
+        <li>
+          <i class="wi wi-wind towards-45-deg"></i>&nbsp;
+          <span>2.0 m/s SSW</span>
+        </li>
+        <li><i class="wi wi-barometer"></i>&nbsp; <span>1038 hPa</span></li>
+        <li>
+          <i class="wi wi-barometer"></i>&nbsp; <span>Humidity 69 %</span>
+        </li>
+        <li><i class="wi wi-sunrise"></i>&nbsp; <span>UV: 1</span></li>
+      </ul>
+    </div>
+    <table class="details__temperatures">
+      <thead>
+        <th></th>
+        <th>Morning</th>
+        <th>Afternoon</th>
+        <th>Evening</th>
+        <th>Night</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="title__body">Temperature</td>
+          <td>3°C</td>
+          <td>7°C</td>
+          <td>5°C</td>
+          <td>4°C</td>
+        </tr>
+        <tr>
+          <td class="title__body">Feels Like</td>
+          <td>3°C</td>
+          <td>6°C</td>
+          <td>5°C</td>
+          <td>3°C</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="details__sun">
+      <div class="sunrise">
+        <span>Sunrise</span>
+        <span>07:59am</span>
+      </div>
+      <div class="sunset">
+        <span>Sunset</span>
+        <span>04:24pm</span>
+      </div>
+    </div>
+  </article>
+</section>
