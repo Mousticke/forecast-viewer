@@ -2,21 +2,54 @@
   <article class="weather__container">
     <div class="title__container">
       <div class="city__info">
-        <h2>Luxembourg City</h2>
-        <p>US</p>
+        <h2>{{ currentCity.name }}</h2>
+        <p>{{ currentCity.sys.country_code }}</p>
       </div>
-      <p class="weather__date">Jan 18, 2022</p>
+      <p class="weather__date">
+        {{ currentCity.unix_data_time | date: "MMM d y, h:mm a" }}
+      </p>
       <div class="weather__icon">
-        <i class="wi wi-night-sleet"></i>
-        <h3 class="weather__status">Rainy</h3>
+        <div class="icon_container">
+          <i class="wi wi-night-sleet"></i>
+          <h3 class="weather__status">{{ currentCity.weather[0].main }}</h3>
+        </div>
+        <div class="icon_container">
+          <i class="wi wi-humidity"></i>
+          <h3 class="weather__status">{{ currentCity.main.humidity }}%</h3>
+        </div>
+        <div class="icon_container">
+          <i class="wi wi-strong-wind"></i>
+          <h3 class="weather__status">
+            {{ currentCity.wind.speed
+            }}{{ currentCity.metadata.weather_speed_unit }}
+          </h3>
+        </div>
       </div>
     </div>
     <div class="weather__info">
-      <h2>7°C</h2>
+      <div class="weather_degree">
+        <h2>
+          {{ currentCity.main.temp | number: "1.0-0"
+          }}{{ currentCity.metadata.weather_temperature_unit }}
+        </h2>
+        <span>
+          Feels like : {{ currentCity.main.feels_like | number: "1.1-1"
+          }}{{ currentCity.metadata.weather_temperature_unit }}
+        </span>
+      </div>
+
       <p>
-        <span class="lowest_temperature">9°C</span>
-        <span class="temperature__limiter">/</span>
-        <span class="highest_temperature">18°C</span>
+        <span class="lowest_temperature"
+          ><i class="wi wi-direction-down-right"></i>&nbsp;{{
+            currentCity.main.temp_min | number: "1.1-1"
+          }}{{ currentCity.metadata.weather_temperature_unit }}</span
+        >
+        <span class="temperature__limiter">&nbsp;</span>
+        <span class="highest_temperature"
+          ><i class="wi wi-direction-up-right"></i>&nbsp;{{
+            currentCity.main.temp_max | number: "1.1-1"
+          }}{{ currentCity.metadata.weather_temperature_unit }}</span
+        >
       </p>
     </div>
   </article>
@@ -100,9 +133,7 @@
           <span>2.0 m/s SSW</span>
         </li>
         <li><i class="wi wi-barometer"></i>&nbsp; <span>1038 hPa</span></li>
-        <li>
-          <i class="wi wi-barometer"></i>&nbsp; <span>Humidity 69 %</span>
-        </li>
+        <li><i class="wi wi-humidity"></i>&nbsp; <span>Humidity 69 %</span></li>
         <li><i class="wi wi-sunrise"></i>&nbsp; <span>UV: 1</span></li>
       </ul>
     </div>

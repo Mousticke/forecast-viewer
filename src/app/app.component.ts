@@ -18,7 +18,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.weatherCityService
-      .getLocationWeather(undefined, undefined, [''])
+      .getLocationWeather(undefined, undefined, ['hourly'])
       .subscribe((data: any) => {
         this.weatherCityFullData.setAlert(data.alerts);
         this.weatherCityFullData.setCurrent(data.current);

@@ -3,7 +3,9 @@
 app-forecast-overview {
   display: grid;
   margin: 1rem;
+  grid-template-columns: 80vw;
   grid-template-rows: 1fr auto;
+  max-width: 90vw;
   grid-template-areas:
     "forecastOverviewSummary"
     "forecastOverviewDetail";
@@ -14,8 +16,13 @@ app-forecast-overview {
 
   @include small_desktop {
     margin: 2rem;
+    max-width: 90vw;
     grid-template-columns: minmax(300px, 500px) auto;
     grid-template-rows: auto;
     grid-template-areas: "forecastOverviewSummary forecastOverviewDetail";
+  }
+
+  @include desktop {
+    width: 80vw;
   }
 }

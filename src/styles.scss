@@ -8,7 +8,7 @@
 }
 
 :root {
-  --maxFontSize: 18;
+  --maxFontSize: 16;
   --minFontSize: 14;
   --fontSize: 16;
   --purple: #6165f8;
@@ -38,6 +38,16 @@ html {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  font-size: calc(
+    12px + (var(--maxFontSize) - var(--minFontSize)) *
+      ((100vw - 320px) / (1800 - 320))
+  );
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1,
@@ -82,15 +92,6 @@ i {
 
 .highest_temperature {
   color: var(--crimson);
-}
-
-@media (min-width: 320px) {
-  html {
-    font-size: calc(
-      14px + (var(--maxFontSize) - var(--minFontSize)) *
-        ((100vw - 320px) / (1600 - 320))
-    );
-  }
 }
 
 body {

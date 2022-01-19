@@ -98,80 +98,83 @@ export class FullWeatherCity implements IFullWeatherCity {
 
   setDaily(dailies: Array<any>) {
     this.daily = new Array<IDaily>();
-    for (let i = 0; i < dailies.length; i++) {
-      const weather = new Array<IWeather>();
-      for (let j = 0; j < dailies[i].weather.length; j++) {
-        weather.push({
-          description: dailies[i].weather[j].description,
-          icon: dailies[i].weather[j].icon,
-          id: dailies[i].weather[j].id,
-          main: dailies[i].weather[j].main,
+    if (dailies) {
+      for (let i = 0; i < dailies.length; i++) {
+        const weather = new Array<IWeather>();
+        for (let j = 0; j < dailies[i].weather.length; j++) {
+          weather.push({
+            description: dailies[i].weather[j].description,
+            icon: dailies[i].weather[j].icon,
+            id: dailies[i].weather[j].id,
+            main: dailies[i].weather[j].main,
+          });
+        }
+
+        this.daily.push({
+          clouds: dailies[i].clouds,
+          dew_point: dailies[i].dew_point,
+          dt: dailies[i].dt,
+          feels_like: {
+            day: dailies[i].feels_like.day,
+            night: dailies[i].feels_like.night,
+            eve: dailies[i].feels_like.eve,
+            morn: dailies[i].feels_like.morn,
+          },
+          humidity: dailies[i].humidity,
+          pop: dailies[i].pop,
+          pressure: dailies[i].pressure,
+          sunrise: dailies[i].sunrise,
+          sunset: dailies[i].sunset,
+          temp: {
+            day: dailies[i].temp.day,
+            night: dailies[i].temp.night,
+            eve: dailies[i].temp.eve,
+            morn: dailies[i].temp.morn,
+            min: dailies[i].temp.min,
+            max: dailies[i].temp.max,
+          },
+          uvi: dailies[i].uvi,
+          visibility: dailies[i].visibility,
+          weather: weather,
+          wind_deg: dailies[i].wind_deg,
+          wind_gust: dailies[i].wind_gust,
+          wind_speed: dailies[i].wind_speed,
         });
       }
-
-      this.daily.push({
-        clouds: dailies[i].clouds,
-        dew_point: dailies[i].dew_point,
-        dt: dailies[i].dt,
-        feels_like: {
-          day: dailies[i].feels_like.day,
-          night: dailies[i].feels_like.night,
-          eve: dailies[i].feels_like.eve,
-          morn: dailies[i].feels_like.morn,
-        },
-        humidity: dailies[i].humidity,
-        pop: dailies[i].pop,
-        pressure: dailies[i].pressure,
-        sunrise: dailies[i].sunrise,
-        sunset: dailies[i].sunset,
-        temp: {
-          day: dailies[i].temp.day,
-          night: dailies[i].temp.night,
-          eve: dailies[i].temp.eve,
-          morn: dailies[i].temp.morn,
-          min: dailies[i].temp.min,
-          max: dailies[i].temp.max,
-        },
-        uvi: dailies[i].uvi,
-        visibility: dailies[i].visibility,
-        weather: weather,
-        wind_deg: dailies[i].wind_deg,
-        wind_gust: dailies[i].wind_gust,
-        wind_speed: dailies[i].wind_speed,
-      });
     }
   }
 
   setHourly(hourlies: Array<any>) {
     this.hourly = new Array<ILightHourly>();
+    if (hourlies) {
+      for (let i = 0; i < hourlies.length; i++) {
+        const weather = new Array<IWeather>();
+        for (let j = 0; j < hourlies[i].weather.length; j++) {
+          weather.push({
+            description: hourlies[i].weather[j].description,
+            icon: hourlies[i].weather[j].icon,
+            id: hourlies[i].weather[j].id,
+            main: hourlies[i].weather[j].main,
+          });
+        }
 
-    for (let i = 0; i < hourlies.length; i++) {
-      const weather = new Array<IWeather>();
-      for (let j = 0; j < hourlies[i].weather.length; j++) {
-        weather.push({
-          description: hourlies[i].weather[j].description,
-          icon: hourlies[i].weather[j].icon,
-          id: hourlies[i].weather[j].id,
-          main: hourlies[i].weather[j].main,
+        this.hourly.push({
+          clouds: hourlies[i].clouds,
+          dew_point: hourlies[i].dew_point,
+          dt: hourlies[i].dt,
+          feels_like: hourlies[i].feels_like,
+          humidity: hourlies[i].humidity,
+          pop: hourlies[i].pop,
+          pressure: hourlies[i].pressure,
+          temp: hourlies[i].temp,
+          uvi: hourlies[i].uvi,
+          visibility: hourlies[i].visibility,
+          weather: weather,
+          wind_deg: hourlies[i].wind_deg,
+          wind_gust: hourlies[i].wind_gust,
+          wind_speed: hourlies[i].wind_speed,
         });
       }
-
-      this.hourly.push({
-        clouds: hourlies[i].clouds,
-        dew_point: hourlies[i].dew_point,
-        dt: hourlies[i].dt,
-        feels_like: hourlies[i].feels_like,
-        humidity: hourlies[i].humidity,
-        pop: hourlies[i].pop,
-        pressure: hourlies[i].pressure,
-        temp: hourlies[i].temp,
-        uvi: hourlies[i].uvi,
-        visibility: hourlies[i].visibility,
-        weather: weather,
-        wind_deg: hourlies[i].wind_deg,
-        wind_gust: hourlies[i].wind_gust,
-        wind_speed: hourlies[i].wind_speed,
-      });
     }
   }
 

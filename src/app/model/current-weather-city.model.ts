@@ -129,7 +129,7 @@ export class CurrentWeatherCity implements ICurrentWeatherCity {
   }
 
   setDataTime(unixDateTime: number, unixTimezone: number) {
-    this.unix_data_time = unixDateTime;
+    this.unix_data_time = new Date(unixDateTime * 1000).getTime();
     this.metadata.unix_timezone = unixTimezone;
   }
 }
