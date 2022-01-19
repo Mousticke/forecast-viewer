@@ -1,176 +1,97 @@
 <section class="section__container">
-  <article class="weather__container">
-    <div class="title__container">
-      <div class="city__info">
-        <h2>{{ currentCity.name }}</h2>
+  <!--Article Weather Overview-->
+  <article class="weather_overview">
+    <!--Weather Overview Container-->
+    <div class="current_country_data">
+      <div class="country_container">
+        <h2 class="country_name">{{ currentCity.name }}</h2>
         <p>{{ currentCity.sys.country_code }}</p>
       </div>
-      <p class="weather__date">
-        {{ currentCity.unix_data_time | date: "MMM d y, h:mm a" }}
-      </p>
-      <div class="weather__icon">
+      <div class="weather_date_container">
+        <p class="weather__date">
+          {{ currentCity.unix_data_time | date: "MMM d y, h:mm a" }}
+        </p>
+      </div>
+      <div class="light_meteorology_data_container">
         <div class="icon_container">
           <i class="wi wi-night-sleet"></i>
-          <h3 class="weather__status">{{ currentCity.weather[0].main }}</h3>
+          <span class="weather_data">{{ currentCity.weather[0].main }}</span>
         </div>
         <div class="icon_container">
           <i class="wi wi-humidity"></i>
-          <h3 class="weather__status">{{ currentCity.main.humidity }}%</h3>
+          <span class="weather_data">{{ currentCity.main.humidity }}%</span>
         </div>
         <div class="icon_container">
           <i class="wi wi-strong-wind"></i>
-          <h3 class="weather__status">
+          <span class="weather_data">
             {{ currentCity.wind.speed
             }}{{ currentCity.metadata.weather_speed_unit }}
-          </h3>
+          </span>
         </div>
       </div>
     </div>
-    <div class="weather__info">
-      <div class="weather_degree">
-        <h2>
+    <div class="current_country_temperature_container">
+      <div class="weather_degree_container">
+        <h2 class="weather_degree">
           {{ currentCity.main.temp | number: "1.0-0"
           }}{{ currentCity.metadata.weather_temperature_unit }}
         </h2>
-        <span>
+        <span class="weather_feeling">
           Feels like : {{ currentCity.main.feels_like | number: "1.1-1"
           }}{{ currentCity.metadata.weather_temperature_unit }}
         </span>
+        <div class="weather_temperature_boundary">
+          <span class="lowest_temperature"
+            >{{ currentCity.main.temp_min | number: "1.1-1"
+            }}{{ currentCity.metadata.weather_temperature_unit }}</span
+          >
+          <span class="temperature__limiter">/</span>
+          <span class="highest_temperature"
+            >{{ currentCity.main.temp_max | number: "1.1-1"
+            }}{{ currentCity.metadata.weather_temperature_unit }}</span
+          >
+        </div>
       </div>
-
-      <p>
-        <span class="lowest_temperature"
-          ><i class="wi wi-direction-down-right"></i>&nbsp;{{
-            currentCity.main.temp_min | number: "1.1-1"
-          }}{{ currentCity.metadata.weather_temperature_unit }}</span
-        >
-        <span class="temperature__limiter">&nbsp;</span>
-        <span class="highest_temperature"
-          ><i class="wi wi-direction-up-right"></i>&nbsp;{{
-            currentCity.main.temp_max | number: "1.1-1"
-          }}{{ currentCity.metadata.weather_temperature_unit }}</span
-        >
-      </p>
     </div>
   </article>
-  <article class="weather__details__container">
-    <ul class="forecast">
-      <li>
-        <h5>Mon</h5>
+
+  <!--Article Weather Forecast-->
+  <article class="city_forecast_container">
+    <ul class="forecast_list_container">
+      <li
+        class="forecast_day_item"
+        *ngFor="let dayCity of fullCity.daily.slice(0, 5)"
+      >
+        <h5>{{ dayCity.dt | date: "EEE" }}</h5>
         <i class="wi wi-night-sleet"></i>
         <p>
-          <span class="lowest_temperature">9°C</span> /
-          <span class="highest_temperature">18°C</span>
-        </p>
-      </li>
-      <li>
-        <h5>Tue</h5>
-        <i class="wi wi-night-sleet"></i>
-        <p>
-          <span class="lowest_temperature">9°C</span> /
-          <span class="highest_temperature">18°C</span>
-        </p>
-      </li>
-      <li>
-        <h5>Web</h5>
-        <i class="wi wi-night-sleet"></i>
-        <p>
-          <span class="lowest_temperature">9°C</span> /
-          <span class="highest_temperature">18°C</span>
-        </p>
-      </li>
-      <li>
-        <h5>Thur</h5>
-        <i class="wi wi-night-sleet"></i>
-        <p>
-          <span class="lowest_temperature">9°C</span> /
-          <span class="highest_temperature">18°C</span>
-        </p>
-      </li>
-      <li>
-        <h5>Fri</h5>
-        <i class="wi wi-night-sleet"></i>
-        <p>
-          <span class="lowest_temperature">9°C</span> /
-          <span class="highest_temperature">18°C</span>
+          <span class="lowest_temperature"
+            >{{ dayCity.temp.min | number: "1.0-0"
+            }}{{ fullCity.metadata.weather_temperature_unit }}</span
+          >
+          /
+          <span class="highest_temperature"
+            >{{ dayCity.temp.max | number: "1.0-0"
+            }}{{ fullCity.metadata.weather_temperature_unit }}</span
+          >
         </p>
       </li>
     </ul>
   </article>
+
+  <!--Article Weather Details-->
+  <app-daily-details
+    [fullCity]="fullCity"
+    [currentCity]="currentCity"
+    class="daily_details_container"
+    [ngClass]="showDetails ? 'details-display' : 'details-hide'"
+  >
+  </app-daily-details>
+
+  <!--Toggler-->
   <div
     (click)="showDetails = !showDetails"
-    class="toggler__details"
-    [ngClass]="showDetails ? 'to__opposite' : 'to__forward'"
+    class="toggler_details"
+    [ngClass]="showDetails ? 'to_opposite' : 'to_forward'"
   ></div>
-</section>
-<section
-  class="section__container__details"
-  [ngClass]="
-    showDetails
-      ? 'section__container__details-display'
-      : 'section__container__details-hide'
-  "
->
-  <article class="details__container">
-    <div class="description__container">
-      <div class="description__icon">
-        <i class="wi wi-day-sunny"></i>
-      </div>
-      <div class="description__text">
-        <p>Description of the weather</p>
-        <span>The high will be 8°C, the low will be 3°C</span>
-      </div>
-    </div>
-    <div class="alert__container">
-      <span>Last Alert : </span>
-      <span>Alert from the model</span>
-    </div>
-    <div class="details__data">
-      <ul class="details__list">
-        <li><i class="wi wi-hail"></i>&nbsp; <span>0%</span></li>
-        <li>
-          <i class="wi wi-wind towards-45-deg"></i>&nbsp;
-          <span>2.0 m/s SSW</span>
-        </li>
-        <li><i class="wi wi-barometer"></i>&nbsp; <span>1038 hPa</span></li>
-        <li><i class="wi wi-humidity"></i>&nbsp; <span>Humidity 69 %</span></li>
-        <li><i class="wi wi-sunrise"></i>&nbsp; <span>UV: 1</span></li>
-      </ul>
-    </div>
-    <table class="details__temperatures">
-      <thead>
-        <th></th>
-        <th>Morning</th>
-        <th>Afternoon</th>
-        <th>Evening</th>
-        <th>Night</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="title__body">Temperature</td>
-          <td>3°C</td>
-          <td>7°C</td>
-          <td>5°C</td>
-          <td>4°C</td>
-        </tr>
-        <tr>
-          <td class="title__body">Feels Like</td>
-          <td>3°C</td>
-          <td>6°C</td>
-          <td>5°C</td>
-          <td>3°C</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="details__sun">
-      <div class="sunrise">
-        <span>Sunrise</span>
-        <span>07:59am</span>
-      </div>
-      <div class="sunset">
-        <span>Sunset</span>
-        <span>04:24pm</span>
-      </div>
-    </div>
-  </article>
 </section>

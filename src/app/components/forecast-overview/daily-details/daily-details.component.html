@@ -1,0 +1,171 @@
+<div class="description_container">
+  <div class="weather_description_container">
+    <div class="weather_description_text">
+      <i class="wi wi-day-sunny"></i>
+      <p>
+        {{ currentCity.weather[0].description | titlecase }}
+      </p>
+    </div>
+    <span
+      *ngIf="
+        fullCity.daily.length > 0;
+        then dailyHighLow;
+        else dailyNotPopulated
+      "
+    ></span>
+  </div>
+  <div class="weather_alert_container">
+    <span
+      *ngIf="
+        fullCity.alerts.length > 0;
+        then alertContent;
+        else alertNotPopulated
+      "
+    ></span>
+  </div>
+
+  <div
+    class="metrology_data_container"
+    *ngIf="
+      fullCity.daily.length > 0;
+      then dailyMetrology;
+      else dailyNotPopulated
+    "
+  ></div>
+  <table class="details_temperatures">
+    <thead>
+      <th></th>
+      <th>Morning</th>
+      <th>Afternoon</th>
+      <th>Evening</th>
+      <th>Night</th>
+    </thead>
+    <span
+      *ngIf="
+        fullCity.daily.length > 0;
+        then dailyTableTemperature;
+        else dailyTableNoTemperature
+      "
+    ></span>
+  </table>
+
+  <div class="details_sun_container">
+    <div class="sunrise">
+      <span>Sunrise</span>
+      <span>07:59am</span>
+    </div>
+    <div class="sunset">
+      <span>Sunset</span>
+      <span>04:24pm</span>
+    </div>
+  </div>
+</div>
+
+<ng-template #dailyNotPopulated>Loading Daily...</ng-template>
+<ng-template #alertNotPopulated>Loading Alert...</ng-template>
+<ng-template #dailyTableNoTemperature>
+  <tr>
+    <td class="title_body">Temperature</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td class="title_body">Feels Like</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+</ng-template>
+
+<ng-template #dailyHighLow
+  ><span class="weather_description_hilo"
+    >The high will be
+    <span class="highest_temperature"
+      >{{ fullCity.daily[0].temp.max | number: "1.0-0"
+      }}{{ fullCity.metadata.weather_temperature_unit }}</span
+    >, the low will be
+    <span class="lowest_temperature"
+      >{{ fullCity.daily[0].temp.min | number: "1.0-0"
+      }}{{ fullCity.metadata.weather_temperature_unit }}</span
+    ></span
+  ></ng-template
+>
+
+<ng-template #alertContent>{{
+  fullCity.alerts[fullCity.alerts.length - 1].description
+}}</ng-template>
+
+<ng-template #dailyMetrology>
+  <ul class="metrology_list">
+    <li>
+      <i class="wi wi-hail"></i>&nbsp;
+      <span>{{ fullCity.daily[0].pop | percent }} </span>
+    </li>
+    <li>
+      <i class="wi wi-wind towards-45-deg"></i>&nbsp;
+      <span
+        >{{ fullCity.daily[0].wind_speed }}
+        {{ fullCity.metadata.weather_speed_unit }}
+        {{ fullCity.daily[0].wind_deg }}°</span
+      >
+    </li>
+    <li>
+      <i class="wi wi-barometer"></i>&nbsp;
+      <span>{{ fullCity.daily[0].pressure }} hPa</span>
+    </li>
+    <li>
+      <i class="wi wi-humidity"></i>&nbsp;
+      <span>{{ fullCity.daily[0].humidity }} %</span>
+    </li>
+    <li>
+      <i class="wi wi-sunrise"></i>&nbsp;
+      <span>UV: {{ fullCity.daily[0].uvi }}</span>
+    </li>
+  </ul>
+</ng-template>
+
+<ng-template #dailyTableTemperature>
+  <tbody>
+    <tr>
+      <td class="title_body">Temperature</td>
+      <td>
+        {{ fullCity.daily[0].temp.morn | number: "1.0-0"
+        }}{{ fullCity.metadata.weather_temperature_unit }}
+      </td>
+      <td>
+        {{ fullCity.daily[0].temp.day | number: "1.0-0"
+        }}{{ fullCity.metadata.weather_temperature_unit }}
+      </td>
+      <td>
+        {{ fullCity.daily[0].temp.eve | number: "1.0-0"
+        }}{{ fullCity.metadata.weather_temperature_unit }}
+      </td>
+      <td>
+        {{ fullCity.daily[0].temp.night | number: "1.0-0"
+        }}{{ fullCity.metadata.weather_temperature_unit }}
+      </td>
+    </tr>
+    <tr>
+      <td class="title_body">Feels Like</td>
+      <td>
+        {{ fullCity.daily[0].feels_like.morn | number: "1.0-0"
+        }}{{ fullCity.metadata.weather_temperature_unit }}
+      </td>
+      <td>
+        {{ fullCity.daily[0].feels_like.day | number: "1.0-0"
+        }}{{ fullCity.metadata.weather_temperature_unit }}
+      </td>
+      <td>
+        {{ fullCity.daily[0].feels_like.eve | number: "1.0-0"
+        }}{{ fullCity.metadata.weather_temperature_unit }}
+      </td>
+      <td>
+        {{ fullCity.daily[0].feels_like.night | number: "1.0-0"
+        }}{{ fullCity.metadata.weather_temperature_unit }}
+      </td>
+    </tr>
+  </tbody>
+</ng-template>
