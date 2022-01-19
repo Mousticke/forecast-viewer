@@ -1,0 +1,56 @@
+@mixin flex_column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex_row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin section_global {
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+  padding: 1rem;
+  background: rgb(11 21 64 / 88%);
+  box-shadow: 0 8px 32px 0 rgb(31 38 135 / 67%);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+@mixin grid_forecastOverview {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "overviewCity forecastCity"
+    "overviewForecast forecastCity";
+}
+
+@mixin section_container_small {
+  @include flex_column;
+  @include section_global;
+}
+
+@mixin section_container_tablet {
+  @include grid_forecastOverview;
+  @include section_global;
+}
+
+@mixin xOverflow() {
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: hsl(215deg 29% 16%);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: hsl(215deg 68% 8%);
+  }
+}

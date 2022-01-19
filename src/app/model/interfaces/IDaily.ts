@@ -15,7 +15,7 @@ export interface IDaily {
   temp: IFullTemp;
   uvi: number;
   visibility: number;
-  weather: IWeather[];
+  weather: Array<IWeather>;
   wind_deg: number;
   wind_gust: number;
   wind_speed: number;

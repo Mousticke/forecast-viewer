@@ -31,7 +31,7 @@ export class FullWeatherCity implements IFullWeatherCity {
           : WeatherUnitsSpeed.Imperial,
     };
 
-    this.alerts = new Array<IAlert>();
+    this.alerts = new Array<IAlert>(0);
     this.current = {
       clouds: 0,
       dew_point: 0,
@@ -50,8 +50,9 @@ export class FullWeatherCity implements IFullWeatherCity {
       wind_speed: 0,
     };
 
-    this.daily = new Array<IDaily>();
-    this.hourly = new Array<ILightHourly>();
+    this.daily = new Array<IDaily>(0);
+
+    this.hourly = new Array<ILightHourly>(0);
   }
 
   setAlert(alerts: Array<any>) {
@@ -80,12 +81,12 @@ export class FullWeatherCity implements IFullWeatherCity {
     this.current = {
       clouds: current.clouds,
       dew_point: current.dew_point,
-      dt: current.dt,
+      dt: new Date(current.dt * 1000).getTime(),
       feels_like: current.feels_like,
       humidity: current.humidity,
       pressure: current.pressure,
-      sunrise: current.sunrise,
-      sunset: current.sunset,
+      sunrise: new Date(current.sunrise * 1000).getTime(),
+      sunset: new Date(current.sunset * 1000).getTime(),
       temp: current.temp,
       uvi: current.uvi,
       visibility: current.visibility,
@@ -113,7 +114,7 @@ export class FullWeatherCity implements IFullWeatherCity {
         this.daily.push({
           clouds: dailies[i].clouds,
           dew_point: dailies[i].dew_point,
-          dt: dailies[i].dt,
+          dt: new Date(dailies[i].dt * 1000).getTime(),
           feels_like: {
             day: dailies[i].feels_like.day,
             night: dailies[i].feels_like.night,
@@ -123,8 +124,8 @@ export class FullWeatherCity implements IFullWeatherCity {
           humidity: dailies[i].humidity,
           pop: dailies[i].pop,
           pressure: dailies[i].pressure,
-          sunrise: dailies[i].sunrise,
-          sunset: dailies[i].sunset,
+          sunrise: new Date(dailies[i].sunrise * 1000).getTime(),
+          sunset: new Date(dailies[i].sunset * 1000).getTime(),
           temp: {
             day: dailies[i].temp.day,
             night: dailies[i].temp.night,
@@ -161,7 +162,7 @@ export class FullWeatherCity implements IFullWeatherCity {
         this.hourly.push({
           clouds: hourlies[i].clouds,
           dew_point: hourlies[i].dew_point,
-          dt: hourlies[i].dt,
+          dt: new Date(hourlies[i].dt * 1000).getTime(),
           feels_like: hourlies[i].feels_like,
           humidity: hourlies[i].humidity,
           pop: hourlies[i].pop,

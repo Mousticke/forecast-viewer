@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ForeCastOverviewComponent } from './components/forecast-overview/forecast-overview.component';
 import { ForecastContainerComponent } from './components/forecast-container/forecast-container.component';
 import { ChartContainerComponent } from './components/chart-container/chart-container.component';
+import { DailyDetailsComponent } from './components/forecast-overview/daily-details/daily-details.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { ChartContainerComponent } from './components/chart-container/chart-cont
     ForeCastOverviewComponent,
     ForecastContainerComponent,
     ChartContainerComponent,
+    DailyDetailsComponent,
   ],
   imports: [BrowserModule, HttpClientModule],
   providers: [],

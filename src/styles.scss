@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 @import "styles/breakpoints";
+@import "styles/mixins";
 
 * {
   box-sizing: border-box;
@@ -17,7 +18,7 @@
   --darkNavy: #110e3c;
   --lightBlue: #e3f6fe;
   --cyan: hsl(178deg 100% 44%);
-  --green: #00e37a;
+  --blue: #00adff;
   --crimson: #ff4444;
   --h1: 2rem;
   --h2: 1.5rem;
@@ -87,7 +88,7 @@ i {
 }
 
 .lowest_temperature {
-  color: var(--green);
+  color: var(--blue);
 }
 
 .highest_temperature {
