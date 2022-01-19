@@ -7,6 +7,8 @@ import { ForeCastOverviewComponent } from './components/forecast-overview/foreca
 import { ForecastContainerComponent } from './components/forecast-container/forecast-container.component';
 import { ChartContainerComponent } from './components/chart-container/chart-container.component';
 import { DailyDetailsComponent } from './components/forecast-overview/daily-details/daily-details.component';
+import { WeatherSearchComponent } from './components/weather-search/weather-search.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,8 +17,9 @@ import { DailyDetailsComponent } from './components/forecast-overview/daily-deta
     ForecastContainerComponent,
     ChartContainerComponent,
     DailyDetailsComponent,
+    WeatherSearchComponent,
   ],
-  imports: [BrowserModule, HttpClientModule],
+  imports: [BrowserModule, HttpClientModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

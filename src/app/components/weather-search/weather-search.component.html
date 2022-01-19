@@ -1,0 +1,88 @@
+<div class="form_container">
+  <form [formGroup]="cityForm" (ngSubmit)="searchCity()">
+    <div class="input_fields_container">
+      <label class="input">
+        <input
+          class="input_field"
+          name="city_location"
+          type="text"
+          placeholder=" "
+          formControlName="city_location"
+          [ngClass]="
+            city_location && city_location.invalid
+              ? 'input_invalid'
+              : city_location &&
+                city_location.value !== '' &&
+                city_location.valid
+              ? 'input_valid'
+              : ''
+          "
+        />
+        <span class="input_label">Enter a City</span>
+        <span
+          class="input_info_error"
+          *ngIf="city_location && city_location.invalid"
+          >You must provide a valid city</span
+        >
+      </label>
+    </div>
+
+    <button class="button_form">Search</button>
+  </form>
+</div>
+
+<div class="form_container">
+  <form [formGroup]="geoForm" (ngSubmit)="searchGeo()">
+    <div class="input_fields_container">
+      <label class="input">
+        <input
+          class="input_field"
+          name="city_longitude"
+          type="number"
+          placeholder=" "
+          formControlName="city_longitude"
+          [ngClass]="
+            geo_longitude && geo_longitude.invalid
+              ? 'input_invalid'
+              : geo_longitude &&
+                geo_longitude.value !== '' &&
+                geo_longitude.valid
+              ? 'input_valid'
+              : ''
+          "
+        />
+        <span class="input_label">Enter longitude</span>
+        <span
+          class="input_info_error"
+          *ngIf="geo_longitude && geo_longitude.invalid"
+          >You must provide a valid longitude</span
+        >
+      </label>
+
+      <label class="input">
+        <input
+          class="input_field"
+          name="city_latitude"
+          type="number"
+          placeholder=" "
+          formControlName="city_latitude"
+          [ngClass]="
+            geo_latitude && geo_latitude.invalid
+              ? 'input_invalid'
+              : geo_latitude && geo_latitude.value !== '' && geo_latitude.valid
+              ? 'input_valid'
+              : ''
+          "
+        />
+        <span class="input_label">Enter latitude</span>
+        <span
+          class="input_info_error"
+          *ngIf="geo_latitude && geo_latitude.invalid"
+          >You must provide a valid latitude</span
+        >
+      </label>
+    </div>
+
+    <button class="button_form">Search</button>
+  </form>
+</div>

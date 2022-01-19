@@ -1,5 +1,11 @@
 @import "/src/styles.scss";
 
+app-weather-search {
+  @include flex_column();
+  justify-content: center;
+  margin: 1rem;
+}
+
 app-forecast-overview {
   display: grid;
   margin: 1rem;
