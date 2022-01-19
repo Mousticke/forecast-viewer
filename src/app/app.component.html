@@ -1,4 +1,7 @@
-<app-weather-search></app-weather-search>
+<app-weather-search
+  (cityFormEvent)="cityForm($event)"
+  (geoFormEvent)="geoForm($event)"
+></app-weather-search>
 <app-forecast-overview
   [currentCity]="weatherCityData"
   [fullCity]="weatherCityFullData"

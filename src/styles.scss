@@ -44,6 +44,11 @@ html {
     12px + (var(--maxFontSize) - var(--minFontSize)) *
       ((100vw - 320px) / (1800 - 320))
   );
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgb(13, 34, 63) 10%,
+    rgb(7, 18, 34) 100%
+  );
 }
 
 app-root {

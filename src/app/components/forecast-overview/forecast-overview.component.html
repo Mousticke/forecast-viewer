@@ -7,6 +7,10 @@
         <h2 class="country_name">{{ currentCity.name }}</h2>
         <p>{{ currentCity.sys.country_code }}</p>
       </div>
+      <div class="country_lonlat_container">
+        <p>lon : {{ currentCity.coord.lon }}</p>
+        <p>lat : {{ currentCity.coord.lat }}</p>
+      </div>
       <div class="weather_date_container">
         <p class="weather__date">
           {{ currentCity.unix_data_time | date: "MMM d y, h:mm a" }}

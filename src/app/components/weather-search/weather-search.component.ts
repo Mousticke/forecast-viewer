@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { accentedCharacters } from 'src/app/model/constants/AccentChar';
 
@@ -10,6 +10,9 @@ import { accentedCharacters } from 'src/app/model/constants/AccentChar';
 export class WeatherSearchComponent implements OnInit {
   constructor() {}
 
+  @Output() cityFormEvent = new EventEmitter<any>();
+  @Output() geoFormEvent = new EventEmitter<any>();
+
   cityForm = new FormGroup({
     city_location: new FormControl('', [
       Validators.pattern("[a-zA-Z' ,.s-" + accentedCharacters + ']{1,25}$'),
@@ -19,23 +22,15 @@ export class WeatherSearchComponent implements OnInit {
   geoForm = new FormGroup({
     city_longitude: new FormControl(0, [
       Validators.required,
-      Validators.pattern('[0-9]+$'),
+      Validators.pattern('[0-9]+?(.)?([0-9]+)?'),
     ]),
     city_latitude: new FormControl(0, [
       Validators.required,
-      Validators.pattern('[0-9]+$'),
+      Validators.pattern('[0-9]+?(.)?([0-9]+)?'),
     ]),
   });
 
   ngOnInit(): void {}
-
-  searchCity() {
-    console.log(this.cityForm.value);
-  }
-
-  searchGeo() {
-    console.log(this.geoForm.value);
-  }
 
   get city_location() {
     return this.cityForm.get('city_location');

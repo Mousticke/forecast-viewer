@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { map, Observable, switchMap } from 'rxjs';
 import { CurrentWeatherCity } from './model/current-weather-city.model';
 import { FullWeatherCity } from './model/full-weather-city.model';
+import { ICurrentWeatherCity } from './model/interfaces/ICurrentWeatherCity';
+import { IFullWeatherCity } from './model/interfaces/IFullWeatherCity';
 import { WeatherCityService } from './services/weather-city.service';
 
 @Component({
@@ -11,48 +15,109 @@ import { WeatherCityService } from './services/weather-city.service';
 export class AppComponent {
   public weatherCityData: CurrentWeatherCity;
   public weatherCityFullData: FullWeatherCity;
+
   constructor(private weatherCityService: WeatherCityService) {
     this.weatherCityData = new CurrentWeatherCity();
     this.weatherCityFullData = new FullWeatherCity();
   }
 
   ngOnInit() {
-    this.weatherCityService
-      .getLocationWeather(undefined, undefined, ['hourly'])
-      .subscribe((data: any) => {
-        this.weatherCityFullData.setAlert(data.alerts);
-        this.weatherCityFullData.setCurrent(data.current);
-        this.weatherCityFullData.setDaily(data.daily);
-        this.weatherCityFullData.setHourly(data.hourly);
-        this.weatherCityFullData.setMetaData(data.timezone_offset);
-      });
+    this.searchFullCityData(undefined, undefined, ['hourly']);
+    this.searchLightCityData();
+  }
 
+  cityForm(item: any) {
+    this.searchComplete(undefined, undefined, item.city_location, [
+      'hourly',
+    ]).subscribe((data) => {
+      this.populateCurrentCityData(data.currentCity);
+      this.populateCityFullData(data.fullCity);
+    });
+  }
+
+  geoForm(item: any) {
+    this.searchComplete(item.city_longitude, item.city_latitude, undefined, [
+      'hourly',
+    ]).subscribe((data) => {
+      this.populateCurrentCityData(data.currentCity);
+      this.populateCityFullData(data.fullCity);
+    });
+  }
+
+  searchLightCityData(lon?: number, lat?: number, city?: string) {
     this.weatherCityService
-      .getCurrentLocationWeather()
+      .getLightLocationWeather(lon, lat, city)
       .subscribe((data: any) => {
-        this.weatherCityData.setCoord(data.coord.lon, data.coord.lat);
-        this.weatherCityData.setWeather(
-          data.weather[0].id,
-          data.weather[0].main,
-          data.weather[0].description,
-          data.weather[0].icon
-        );
-        this.weatherCityData.setMain(
-          data.main.temp,
-          data.main.feels_like,
-          data.main.temp_min,
-          data.main.temp_max,
-          data.main.pressure,
-          data.main.humidity
-        );
-        this.weatherCityData.setWind(data.wind.speed, data.wind.deg);
-        this.weatherCityData.setName(data.name);
-        this.weatherCityData.setSys(
-          data.sys.country,
-          data.sys.sunrise,
-          data.sys.sunset
-        );
-        this.weatherCityData.setDataTime(data.dt, data.timezone);
+        this.populateCurrentCityData(data);
       });
+  }
+
+  searchFullCityData(lon?: number, lat?: number, exclusion?: Array<string>) {
+    console.log(lon);
+    this.weatherCityService
+      .getLocationWeather(lon, lat, exclusion)
+      .subscribe((data: any) => {
+        this.populateCityFullData(data);
+      });
+  }
+
+  private searchComplete(
+    lon?: number,
+    lat?: number,
+    city?: string,
+    exclusion?: Array<string>
+  ): Observable<any> {
+    return this.weatherCityService.getLightLocationWeather(lon, lat, city).pipe(
+      switchMap((currentCity: ICurrentWeatherCity) => {
+        return this.weatherCityService
+          .getLocationWeather(
+            currentCity.coord.lon,
+            currentCity.coord.lat,
+            exclusion
+          )
+          .pipe(
+            map((fullCity: any) => {
+              return {
+                currentCity,
+                fullCity,
+              };
+            })
+          );
+      })
+    );
+  }
+
+  private populateCurrentCityData(currentCity: any) {
+    this.weatherCityData.setCoord(currentCity.coord.lon, currentCity.coord.lat);
+    this.weatherCityData.setWeather(
+      currentCity.weather[0].id,
+      currentCity.weather[0].main,
+      currentCity.weather[0].description,
+      currentCity.weather[0].icon
+    );
+    this.weatherCityData.setMain(
+      currentCity.main.temp,
+      currentCity.main.feels_like,
+      currentCity.main.temp_min,
+      currentCity.main.temp_max,
+      currentCity.main.pressure,
+      currentCity.main.humidity
+    );
+    this.weatherCityData.setWind(currentCity.wind.speed, currentCity.wind.deg);
+    this.weatherCityData.setName(currentCity.name);
+    this.weatherCityData.setSys(
+      currentCity.sys.country,
+      currentCity.sys.sunrise,
+      currentCity.sys.sunset
+    );
+    this.weatherCityData.setDataTime(currentCity.dt, currentCity.timezone);
+  }
+
+  private populateCityFullData(fullCity: any) {
+    this.weatherCityFullData.setAlert(fullCity.alerts);
+    this.weatherCityFullData.setCurrent(fullCity.current);
+    this.weatherCityFullData.setDaily(fullCity.daily);
+    this.weatherCityFullData.setHourly(fullCity.hourly);
+    this.weatherCityFullData.setMetaData(fullCity.timezone_offset);
   }
 }

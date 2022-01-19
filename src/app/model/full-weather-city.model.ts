@@ -56,15 +56,18 @@ export class FullWeatherCity implements IFullWeatherCity {
   }
 
   setAlert(alerts: Array<any>) {
-    for (let i = 0; i < alerts.length; i++) {
-      this.alerts.push({
-        description: alerts[i].description,
-        end: alerts[i].end,
-        event: alerts[i].event,
-        sender_name: alerts[i].sender_name,
-        start: alerts[i].start,
-        tags: alerts[i].tags,
-      });
+    this.alerts = new Array<IAlert>();
+    if (alerts) {
+      for (let i = 0; i < alerts.length; i++) {
+        this.alerts.push({
+          description: alerts[i].description,
+          end: alerts[i].end,
+          event: alerts[i].event,
+          sender_name: alerts[i].sender_name,
+          start: alerts[i].start,
+          tags: alerts[i].tags,
+        });
+      }
     }
   }
 

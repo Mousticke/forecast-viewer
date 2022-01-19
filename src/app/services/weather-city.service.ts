@@ -23,9 +23,39 @@ export class WeatherCityService {
     return this.getBrowserLocation(baseUrl, resource, params);
   }
 
+  getLightLocationWeather(
+    lon?: number,
+    lat?: number,
+    city?: string
+  ): Observable<ICurrentWeatherCity> {
+    const baseUrl = environment.baseUrlOpenWeather;
+    const resource: string = 'weather';
+    let params = new HttpParams();
+    if (lon && lat) {
+      params = params
+        .append('lat', lat)
+        .append('lon', lon)
+        .append('appid', environment.apiKey)
+        .append('units', environment.units);
+      return this.http.get<ICurrentWeatherCity>(`${baseUrl}/${resource}`, {
+        params: params,
+      });
+    } else if (city) {
+      params = params
+        .append('q', city)
+        .append('appid', environment.apiKey)
+        .append('units', environment.units);
+      return this.http.get<ICurrentWeatherCity>(`${baseUrl}/${resource}`, {
+        params: params,
+      });
+    } else {
+      return this.getCurrentLocationWeather();
+    }
+  }
+
   getLocationWeather(
-    lon?: string,
-    lat?: string,
+    lon?: number,
+    lat?: number,
     exclusion?: Array<string>
   ): Observable<IFullWeatherCity> {
     const baseUrl = environment.baseUrlOpenWeather;
