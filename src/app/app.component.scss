@@ -17,3 +17,10 @@ app-forecast-overview {
     place-items: center;
   }
 }
+
+app-forecast-container {
+  width: 100%;
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+}

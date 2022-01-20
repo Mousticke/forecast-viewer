@@ -14,7 +14,7 @@
   position: relative;
   padding: 1rem;
   background: var(--glassyBlue);
-  box-shadow: 0 8px 32px 0 var(--mediumBlue);
+  box-shadow: 0 0 15px 0 var(--mediumBlue);
   border-radius: 10px;
   border: 1px solid var(--gray);
 }
@@ -43,8 +43,24 @@
 
   &::-webkit-scrollbar {
     height: 10px;
+    width: 100%;
   }
 
+  @include scrollBar();
+}
+
+@mixin yOverflow() {
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    height: 100%;
+    width: 10px;
+  }
+
+  @include scrollBar();
+}
+
+@mixin scrollBar {
   &::-webkit-scrollbar-thumb {
     background-color: var(--grayBlue);
     border-radius: 10px;

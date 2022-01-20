@@ -6,5 +6,7 @@
   [currentCity]="weatherCityData"
   [fullCity]="weatherCityFullData"
 ></app-forecast-overview>
-<app-forecast-container></app-forecast-container>
+<app-forecast-container
+  [fullCity]="weatherCityFullData"
+></app-forecast-container>
 <app-chart-container></app-chart-container>

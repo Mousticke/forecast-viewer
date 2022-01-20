@@ -1,11 +1,16 @@
 <div class="description_container">
+  <div class="description_title_container">
+    <h2 class="description_title">Today's Forecast</h2>
+  </div>
   <div class="weather_description_container">
     <div class="weather_description_text">
-      <!--<i class="wi wi-day-sunny"></i>-->
-      <img src="assets/{{ currentCity.weather[0].icon }}.svg" />
-      <p>
-        {{ currentCity.weather[0].description | titlecase }}
-      </p>
+      <span
+        *ngIf="
+          fullCity.daily.length > 0;
+          then dailyDescription;
+          else dailyNotPopulated
+        "
+      ></span>
     </div>
     <span
       *ngIf="
@@ -79,6 +84,13 @@
     <td>-</td>
     <td>-</td>
   </tr>
+</ng-template>
+
+<ng-template #dailyDescription>
+  <img src="assets/{{ fullCity.daily[0].weather[0].icon }}.svg" />
+  <p>
+    {{ fullCity.daily[0].weather[0].description | titlecase }}
+  </p>
 </ng-template>
 
 <ng-template #dailyHighLow

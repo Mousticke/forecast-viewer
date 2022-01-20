@@ -12,6 +12,16 @@
     margin-block-start: 0rem;
   }
 
+  & > .description_title_container {
+    @include flex_row();
+    justify-content: center;
+    & > .description_title {
+      margin: unset;
+      font-size: 2rem;
+      border-bottom: 1px solid var(--lightGray);
+    }
+  }
+
   & > .weather_description_container {
     @include flex_column();
     align-items: center;
