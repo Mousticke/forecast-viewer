@@ -32,7 +32,7 @@ export class CurrentWeatherCity implements ICurrentWeatherCity {
       id: 0,
       main: '0',
       description: '0',
-      icon: '0',
+      icon: '01d',
     };
 
     this.main = {
