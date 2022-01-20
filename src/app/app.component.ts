@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { map, Observable, switchMap } from 'rxjs';
+import {
+  debounce,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  Observable,
+  Subject,
+  switchMap,
+} from 'rxjs';
 import { CurrentWeatherCity } from './model/current-weather-city.model';
 import { FullWeatherCity } from './model/full-weather-city.model';
+import { ICoord } from './model/interfaces/ICoord';
 import { ICurrentWeatherCity } from './model/interfaces/ICurrentWeatherCity';
-import { IFullWeatherCity } from './model/interfaces/IFullWeatherCity';
 import { WeatherCityService } from './services/weather-city.service';
 
 @Component({
@@ -16,6 +24,9 @@ export class AppComponent {
   public weatherCityData: CurrentWeatherCity;
   public weatherCityFullData: FullWeatherCity;
 
+  private searchCityStream = new Subject<string>();
+  private searchGeoStream = new Subject<ICoord>();
+
   constructor(private weatherCityService: WeatherCityService) {
     this.weatherCityData = new CurrentWeatherCity();
     this.weatherCityFullData = new FullWeatherCity();
@@ -24,23 +35,53 @@ export class AppComponent {
   ngOnInit() {
     this.searchFullCityData(undefined, undefined, ['hourly']);
     this.searchLightCityData();
+
+    this.searchCityStream
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged((a: string, b: string) => {
+          return b === this.weatherCityData.name;
+        }),
+        switchMap((cityName: string) => {
+          return this.searchComplete(undefined, undefined, cityName, [
+            'hourly',
+          ]);
+        })
+      )
+      .subscribe((data) => {
+        this.populateCurrentCityData(data.currentCity);
+        this.populateCityFullData(data.fullCity);
+      });
+
+    this.searchGeoStream
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged((a: ICoord, b: ICoord) => {
+          return (
+            this.weatherCityData.coord.lon === b.lon &&
+            this.weatherCityData.coord.lat === b.lat
+          );
+        }),
+        switchMap((coord: ICoord) => {
+          return this.searchComplete(coord.lon, coord.lat, undefined, [
+            'hourly',
+          ]);
+        })
+      )
+      .subscribe((data) => {
+        this.populateCurrentCityData(data.currentCity);
+        this.populateCityFullData(data.fullCity);
+      });
   }
 
   cityForm(item: any) {
-    this.searchComplete(undefined, undefined, item.city_location, [
-      'hourly',
-    ]).subscribe((data) => {
-      this.populateCurrentCityData(data.currentCity);
-      this.populateCityFullData(data.fullCity);
-    });
+    this.searchCityStream.next(item.city_location);
   }
 
   geoForm(item: any) {
-    this.searchComplete(item.city_longitude, item.city_latitude, undefined, [
-      'hourly',
-    ]).subscribe((data) => {
-      this.populateCurrentCityData(data.currentCity);
-      this.populateCityFullData(data.fullCity);
+    this.searchGeoStream.next({
+      lon: item.city_longitude,
+      lat: item.city_latitude,
     });
   }
 

@@ -30,6 +30,11 @@ export class WeatherSearchComponent implements OnInit {
     ]),
   });
 
+  public completeForm = {
+    cityForm: this.cityForm,
+    geoForm: this.geoForm,
+  };
+
   ngOnInit(): void {}
 
   get city_location() {
