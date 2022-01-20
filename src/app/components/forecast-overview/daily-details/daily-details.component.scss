@@ -58,10 +58,10 @@
     border-collapse: collapse;
     & > tbody > tr {
       vertical-align: middle;
-      border-bottom: 1pt solid gray;
+      border-bottom: 1pt solid var(--gray);
       & > .title_body {
         font-weight: 300;
-        color: lightgray;
+        color: var(--lightGray);
         text-align: left;
         text-transform: uppercase;
       }

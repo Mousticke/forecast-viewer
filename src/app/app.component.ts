@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import {
-  debounce,
   debounceTime,
   distinctUntilChanged,
   map,
@@ -33,45 +31,32 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.searchFullCityData(undefined, undefined, ['hourly']);
-    this.searchLightCityData();
+    /*this.searchFullCityData(undefined, undefined, ['hourly']);
+    this.searchLightCityData();*/
 
-    this.searchCityStream
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged((a: string, b: string) => {
-          return b === this.weatherCityData.name;
-        }),
-        switchMap((cityName: string) => {
-          return this.searchComplete(undefined, undefined, cityName, [
-            'hourly',
-          ]);
-        })
-      )
-      .subscribe((data) => {
-        this.populateCurrentCityData(data.currentCity);
-        this.populateCityFullData(data.fullCity);
-      });
+    this.searchComplete(undefined, undefined, '', ['hourly']).subscribe(
+      (data) => {
+        this.populateAllCityData(data.currentCity, data.fullCity);
+      }
+    );
 
-    this.searchGeoStream
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged((a: ICoord, b: ICoord) => {
-          return (
-            this.weatherCityData.coord.lon === b.lon &&
-            this.weatherCityData.coord.lat === b.lat
-          );
-        }),
-        switchMap((coord: ICoord) => {
-          return this.searchComplete(coord.lon, coord.lat, undefined, [
-            'hourly',
-          ]);
-        })
-      )
-      .subscribe((data) => {
-        this.populateCurrentCityData(data.currentCity);
-        this.populateCityFullData(data.fullCity);
-      });
+    this.searchCityStream.pipe(this.debounceSearchCity()).subscribe({
+      next: (data) => {
+        this.populateAllCityData(data.currentCity, data.fullCity);
+      },
+      error: (err) => {
+        this.ngOnInit();
+      },
+    });
+
+    this.searchGeoStream.pipe(this.debounceSearchGeo()).subscribe({
+      next: (data) => {
+        this.populateAllCityData(data.currentCity, data.fullCity);
+      },
+      error: (err) => {
+        this.ngOnInit();
+      },
+    });
   }
 
   cityForm(item: any) {
@@ -85,20 +70,39 @@ export class AppComponent {
     });
   }
 
-  searchLightCityData(lon?: number, lat?: number, city?: string) {
-    this.weatherCityService
-      .getLightLocationWeather(lon, lat, city)
-      .subscribe((data: any) => {
-        this.populateCurrentCityData(data);
-      });
+  private debounceSearchCity() {
+    return (source: Observable<string>) => {
+      return source.pipe(
+        debounceTime(500),
+        distinctUntilChanged((a: string, b: string) => {
+          return b === this.weatherCityData.name;
+        }),
+        switchMap((cityName: string) => {
+          return this.searchComplete(undefined, undefined, cityName, [
+            'hourly',
+          ]);
+        })
+      );
+    };
   }
 
-  searchFullCityData(lon?: number, lat?: number, exclusion?: Array<string>) {
-    this.weatherCityService
-      .getLocationWeather(lon, lat, exclusion)
-      .subscribe((data: any) => {
-        this.populateCityFullData(data);
-      });
+  private debounceSearchGeo() {
+    return (source: Observable<ICoord>) => {
+      return source.pipe(
+        debounceTime(500),
+        distinctUntilChanged((a: ICoord, b: ICoord) => {
+          return (
+            this.weatherCityData.coord.lon === b.lon &&
+            this.weatherCityData.coord.lat === b.lat
+          );
+        }),
+        switchMap((coord: ICoord) => {
+          return this.searchComplete(coord.lon, coord.lat, undefined, [
+            'hourly',
+          ]);
+        })
+      );
+    };
   }
 
   private searchComplete(
@@ -125,6 +129,11 @@ export class AppComponent {
           );
       })
     );
+  }
+
+  private populateAllCityData(currentCity: any, fullCity: any) {
+    this.populateCurrentCityData(currentCity);
+    this.populateCityFullData(fullCity);
   }
 
   private populateCurrentCityData(currentCity: any) {
@@ -160,4 +169,20 @@ export class AppComponent {
     this.weatherCityFullData.setHourly(fullCity.hourly);
     this.weatherCityFullData.setMetaData(fullCity.timezone_offset);
   }
+
+  /*searchLightCityData(lon?: number, lat?: number, city?: string) {
+    this.weatherCityService
+      .getLightLocationWeather(lon, lat, city)
+      .subscribe((data: any) => {
+        this.populateCurrentCityData(data);
+      });
+  }
+
+  searchFullCityData(lon?: number, lat?: number, exclusion?: Array<string>) {
+    this.weatherCityService
+      .getLocationWeather(lon, lat, exclusion)
+      .subscribe((data: any) => {
+        this.populateCityFullData(data);
+      });
+  }*/
 }

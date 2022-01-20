@@ -4,59 +4,62 @@
     <!--Weather Overview Container-->
     <div class="current_country_data">
       <div class="country_container">
-        <h2 class="country_name">{{ currentCity.name }}</h2>
+        <div class="country_info_container">
+          <h2 class="country_name">{{ currentCity.name }}</h2>
+          <span class="weather_data">{{ currentCity.weather[0].main }}</span>
+        </div>
         <p>{{ currentCity.sys.country_code }}</p>
+        <div class="icon_container">
+          <img src="assets/{{ currentCity.weather[0].icon }}.svg" />
+        </div>
       </div>
+      <!--Longitude Latitude-->
       <div class="country_lonlat_container">
         <p>lon : {{ currentCity.coord.lon }}</p>
         <p>lat : {{ currentCity.coord.lat }}</p>
       </div>
+      <!--Date from API-->
       <div class="weather_date_container">
         <p class="weather__date">
           {{ currentCity.unix_data_time | date: "MMM d y, hh:mm a" }}
         </p>
       </div>
-      <div class="light_meteorology_data_container">
-        <div class="icon_container">
-          <!--<i class="wi wi-night-sleet"></i>-->
-
-          <img src="assets/{{ currentCity.weather[0].icon }}.svg" />
-
-          <span class="weather_data">{{ currentCity.weather[0].main }}</span>
-        </div>
-        <div class="icon_container">
-          <i class="wi wi-humidity"></i>
-          <span class="weather_data">{{ currentCity.main.humidity }}%</span>
-        </div>
-        <div class="icon_container">
-          <i class="wi wi-strong-wind"></i>
-          <span class="weather_data">
-            {{ currentCity.wind.speed
-            }}{{ currentCity.metadata.weather_speed_unit }}
+      <!--Temperature-->
+      <div class="current_country_temperature_container">
+        <div class="weather_degree_container">
+          <h2 class="weather_degree">
+            {{ currentCity.main.temp | number: "1.0-0"
+            }}{{ currentCity.metadata.weather_temperature_unit }}
+          </h2>
+          <span class="weather_feeling">
+            Feels like : {{ currentCity.main.feels_like | number: "1.1-1"
+            }}{{ currentCity.metadata.weather_temperature_unit }}
           </span>
+          <div class="weather_temperature_boundary">
+            <span class="lowest_temperature"
+              >{{ currentCity.main.temp_min | number: "1.1-1"
+              }}{{ currentCity.metadata.weather_temperature_unit }}</span
+            >
+            <span class="temperature__limiter">/</span>
+            <span class="highest_temperature"
+              >{{ currentCity.main.temp_max | number: "1.1-1"
+              }}{{ currentCity.metadata.weather_temperature_unit }}</span
+            >
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="current_country_temperature_container">
-      <div class="weather_degree_container">
-        <h2 class="weather_degree">
-          {{ currentCity.main.temp | number: "1.0-0"
-          }}{{ currentCity.metadata.weather_temperature_unit }}
-        </h2>
-        <span class="weather_feeling">
-          Feels like : {{ currentCity.main.feels_like | number: "1.1-1"
-          }}{{ currentCity.metadata.weather_temperature_unit }}
-        </span>
-        <div class="weather_temperature_boundary">
-          <span class="lowest_temperature"
-            >{{ currentCity.main.temp_min | number: "1.1-1"
-            }}{{ currentCity.metadata.weather_temperature_unit }}</span
-          >
-          <span class="temperature__limiter">/</span>
-          <span class="highest_temperature"
-            >{{ currentCity.main.temp_max | number: "1.1-1"
-            }}{{ currentCity.metadata.weather_temperature_unit }}</span
-          >
+        <!--Basic weather data-->
+        <div class="light_meteorology_data_container">
+          <div class="icon_container">
+            <i class="wi wi-humidity"></i>
+            <span class="weather_data">{{ currentCity.main.humidity }}%</span>
+          </div>
+          <div class="icon_container">
+            <i class="wi wi-strong-wind"></i>
+            <span class="weather_data">
+              {{ currentCity.wind.speed
+              }}{{ currentCity.metadata.weather_speed_unit }}
+            </span>
+          </div>
         </div>
       </div>
     </div>

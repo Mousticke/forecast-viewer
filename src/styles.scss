@@ -9,26 +9,37 @@
 }
 
 :root {
+  --background: radial-gradient(
+    50% 50% at 50% 50%,
+    hsl(215deg 66% 15%) 10%,
+    hsl(216deg 66% 8%) 100%
+  );
   --maxFontSize: 16;
   --minFontSize: 14;
-  --fontSize: 16;
-  --purple: #6165f8;
-  --darkPurple: #2a2552;
-  --lightGray: #fcfdff;
-  --darkNavy: #110e3c;
-  --lightBlue: #e3f6fe;
-  --cyan: hsl(178deg 100% 44%);
-  --blue: #00adff;
-  --crimson: #ff4444;
-  --green: hsl(147deg 100% 50%);
   --h1: 2rem;
   --h2: 1.5rem;
-  --h3: 1.25rem;
-  --h4: 1rem;
-  --h5: 0.875rem;
-  --h6: 0.8rem;
+  --h3: 1.4rem;
+  --h4: 1.2rem;
+  --h5: 1.1rem;
+  --h6: 1rem;
   --font-title: "Poppins", sans-serif;
   --font-default: "Open Sans", sans-serif;
+  --cyan: hsl(178deg 100% 44%);
+  --deepCyan: hsl(199deg 100% 50%);
+  --mediumBlue: hsl(236deg 63% 33% / 67%);
+  --glassyBlue: hsl(229deg 71% 15% / 88%);
+  --deepBlue: hsl(215deg 68% 8%);
+  --darkNavy: hsl(244deg 62% 15%);
+  --crimson: hsl(0deg 100% 63%);
+  --green: hsl(147deg 100% 50%);
+  --lightGray: hsl(220deg 100% 99%);
+  --grayBlue: hsl(215deg 29% 16%);
+  --gray: hsl(0deg 0% 100% / 18%);
+  --gradientBlueGray: linear-gradient(
+    0deg,
+    hsl(233deg 79% 11% / 66%) 0%,
+    hsl(224deg 29% 25% / 29%)
+  );
 }
 
 html {
@@ -44,11 +55,8 @@ html {
     12px + (var(--maxFontSize) - var(--minFontSize)) *
       ((100vw - 320px) / (1800 - 320))
   );
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgb(13, 34, 63) 10%,
-    rgb(7, 18, 34) 100%
-  );
+  background: var(--background);
+  color: (--lightGray);
 }
 
 app-root {
@@ -90,11 +98,11 @@ h5 {
 }
 
 i {
-  color: var(--cyan);
+  color: var(--deepCyan);
 }
 
 .lowest_temperature {
-  color: var(--blue);
+  color: var(--deepCyan);
 }
 
 .highest_temperature {

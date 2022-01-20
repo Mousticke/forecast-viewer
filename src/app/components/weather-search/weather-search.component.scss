@@ -9,6 +9,7 @@
     @include flex_column();
     @include landscape_phone {
       @include flex_row();
+      align-items: center;
     }
 
     gap: 1rem;
@@ -28,7 +29,7 @@
           position: absolute;
           left: 0;
           top: 0;
-          padding: 0.6rem 0.5rem;
+          padding: 0.2rem 0.5rem;
           margin: 0.5rem 0.25rem;
           white-space: nowrap;
           transform: translate(0, 0);
@@ -43,11 +44,12 @@
           box-sizing: border-box;
           display: block;
           width: 100%;
-          border: 1px solid var(--darkNavy);
+          border: none;
           padding: 0.75rem 0.5rem;
           color: var(--darkNavy);
           background: transparent;
-          border-radius: 0.5rem;
+          outline: none;
+          border-bottom: 1px solid var(--darkNavy);
           background: rgb(11 21 64 / 88%);
           &:focus,
           &:not(:placeholder-shown) {
@@ -60,14 +62,14 @@
         }
 
         &_valid {
-          border: 1px solid var(--green);
+          border-bottom: 1px solid var(--green);
           & + .input_label {
             color: var(--green) !important;
           }
         }
 
         &_invalid {
-          border: 1px solid var(--crimson);
+          border-bottom: 1px solid var(--crimson);
           & + .input_label {
             color: var(--crimson) !important;
           }
@@ -77,8 +79,8 @@
     & .button_form {
       padding-inline-end: 1rem;
       padding-inline-start: 1rem;
-      background: rgb(9 22 56);
-      border: 2px solid #080716;
+      background: transparent;
+      border: 1px solid var(--cyan);
       outline: none;
       border-radius: 5px;
       color: var(--cyan);
@@ -92,7 +94,7 @@
       align-items: center;
 
       &:hover {
-        background: hsl(224deg 65% 15% / 88%);
+        background: var(--glassyBlue);
       }
     }
   }

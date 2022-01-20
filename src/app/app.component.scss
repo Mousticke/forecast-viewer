@@ -14,6 +14,6 @@ app-forecast-overview {
   max-width: 90vw;
 
   @include landscape_tablet {
-    place-items: start;
+    place-items: center;
   }
 }

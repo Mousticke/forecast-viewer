@@ -9,14 +9,14 @@
 }
 
 @mixin section_global {
-  color: #fff;
+  color: var(--lightGray);
   overflow: hidden;
   position: relative;
   padding: 1rem;
-  background: rgb(11 21 64 / 88%);
-  box-shadow: 0 8px 32px 0 rgb(31 38 135 / 67%);
+  background: var(--glassyBlue);
+  box-shadow: 0 8px 32px 0 var(--mediumBlue);
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--gray);
 }
 
 @mixin grid_forecastOverview {
@@ -46,11 +46,11 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: hsl(215deg 29% 16%);
+    background-color: var(--grayBlue);
     border-radius: 10px;
   }
 
   &::-webkit-scrollbar-track {
-    background: hsl(215deg 68% 8%);
+    background: var(--deepBlue);
   }
 }

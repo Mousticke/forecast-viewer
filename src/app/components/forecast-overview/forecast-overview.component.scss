@@ -19,11 +19,29 @@
       & > .country_container {
         @include flex_row();
 
-        & > .country_name {
-          font-size: 2.5rem;
-          font-weight: 400;
-          padding-inline-end: 0.3em;
-          margin: unset;
+        & > .country_info_container {
+          @include flex_column();
+          gap: 0.5rem;
+          & > .country_name {
+            font-size: 2.5rem;
+            font-weight: 600;
+            padding-inline-end: 0.3em;
+            margin: unset;
+          }
+          & > .weather_data {
+            font-size: 1.1rem;
+            font-weight: 600;
+          }
+        }
+        & > .icon_container {
+          @include flex_column();
+          gap: 0.3em;
+          margin-left: auto;
+          align-items: center;
+          & > .weather_data {
+            font-size: 1rem;
+            font-weight: 500;
+          }
         }
       }
 
@@ -38,41 +56,42 @@
         @include flex_row();
       }
 
-      & > .light_meteorology_data_container {
-        @include flex_row();
-        justify-content: flex-start;
-        gap: 1em;
-        font-size: 2rem;
+      & > .current_country_temperature_container {
+        @include flex_column();
+        justify-content: center;
         margin-block-start: 1rem;
-        align-items: center;
-        & > .icon_container {
+        & > .weather_degree_container {
           @include flex_column();
-          gap: 0.3em;
           align-items: center;
-          & > .weather_data {
+
+          & > .weather_degree {
+            font-size: 4rem;
+            font-weight: 400;
+            margin: unset;
+          }
+
+          & > .weather_temperature_boundary {
             font-size: 1.2rem;
-            font-weight: 500;
           }
         }
-      }
-    }
 
-    & > .current_country_temperature_container {
-      @include flex_column();
-      justify-content: flex-start;
-
-      & > .weather_degree_container {
-        @include flex_column();
-        align-items: flex-end;
-
-        & > .weather_degree {
-          font-size: 4rem;
-          font-weight: 400;
-          margin: unset;
-        }
-
-        & > .weather_temperature_boundary {
-          font-size: 1.2rem;
+        & > .light_meteorology_data_container {
+          @include flex_row();
+          justify-content: center;
+          gap: 1em;
+          font-size: 1.5rem;
+          margin-block-start: 1rem;
+          margin-block-end: 1rem;
+          align-items: center;
+          & > .icon_container {
+            @include flex_column();
+            gap: 0.3em;
+            align-items: center;
+            & > .weather_data {
+              font-size: 1rem;
+              font-weight: 500;
+            }
+          }
         }
       }
     }
@@ -90,12 +109,11 @@
       display: flex;
       justify-content: space-around;
       list-style-type: none;
-
+      gap: 0.3rem;
       & > .forecast_day_item {
         display: flex;
         flex-direction: column;
         align-items: center;
-
         & > i {
           font-size: 2rem;
           margin: 0.5rem;
@@ -144,7 +162,7 @@
     width: 100%;
     text-align: center;
     transition: all 300ms ease-in-out;
-    background: linear-gradient(0deg, #30303061 0%, rgba(1, 12, 41, 0.29));
+    background: var(--gradientBlueGray);
     &:hover {
       background: rgb(1, 12, 41);
       color: var(--cyan);
