@@ -1,7 +1,8 @@
 <div class="description_container">
   <div class="weather_description_container">
     <div class="weather_description_text">
-      <i class="wi wi-day-sunny"></i>
+      <!--<i class="wi wi-day-sunny"></i>-->
+      <img src="assets/{{ currentCity.weather[0].icon }}.svg" />
       <p>
         {{ currentCity.weather[0].description | titlecase }}
       </p>

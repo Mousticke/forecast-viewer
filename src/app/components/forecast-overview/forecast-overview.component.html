@@ -18,7 +18,10 @@
       </div>
       <div class="light_meteorology_data_container">
         <div class="icon_container">
-          <i class="wi wi-night-sleet"></i>
+          <!--<i class="wi wi-night-sleet"></i>-->
+
+          <img src="assets/{{ currentCity.weather[0].icon }}.svg" />
+
           <span class="weather_data">{{ currentCity.weather[0].main }}</span>
         </div>
         <div class="icon_container">
@@ -67,7 +70,8 @@
         *ngFor="let dayCity of fullCity.daily.slice(0, 5)"
       >
         <h5>{{ dayCity.dt | date: "EEE" }}</h5>
-        <i class="wi wi-night-sleet"></i>
+        <!--<i class="wi wi-night-sleet"></i>-->
+        <img src="assets/{{ dayCity.weather[0].icon }}.svg" />
         <p>
           <span class="lowest_temperature"
             >{{ dayCity.temp.min | number: "1.0-0"
