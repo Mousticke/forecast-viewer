@@ -31,16 +31,17 @@ export class WeatherCityService {
     const baseUrl = environment.baseUrlOpenWeather;
     const resource: string = 'weather';
     let params = new HttpParams();
-    if (lon && lat) {
+    if (lon !== undefined && lat !== undefined) {
       params = params
         .append('lat', lat)
         .append('lon', lon)
         .append('appid', environment.apiKey)
         .append('units', environment.units);
+
       return this.http.get<ICurrentWeatherCity>(`${baseUrl}/${resource}`, {
         params: params,
       });
-    } else if (city) {
+    } else if (city && city !== '') {
       params = params
         .append('q', city)
         .append('appid', environment.apiKey)
@@ -66,7 +67,7 @@ export class WeatherCityService {
       exclusion_str = exclusion.join(',');
       params = params.append('exclude', exclusion_str);
     }
-    if (lon && lat) {
+    if (lon !== undefined && lat !== undefined) {
       params = params
         .append('lat', lat)
         .append('lon', lon)

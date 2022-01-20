@@ -94,7 +94,6 @@ export class AppComponent {
   }
 
   searchFullCityData(lon?: number, lat?: number, exclusion?: Array<string>) {
-    console.log(lon);
     this.weatherCityService
       .getLocationWeather(lon, lat, exclusion)
       .subscribe((data: any) => {

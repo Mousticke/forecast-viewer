@@ -52,11 +52,11 @@
   <div class="details_sun_container">
     <div class="sunrise">
       <span>Sunrise</span>
-      <span>07:59am</span>
+      <span>{{ fullCity.current.sunrise | date: "hh:mm a" }}</span>
     </div>
     <div class="sunset">
       <span>Sunset</span>
-      <span>04:24pm</span>
+      <span>{{ fullCity.current.sunset | date: "hh:mm a" }}</span>
     </div>
   </div>
 </div>
