@@ -5,10 +5,10 @@ import { IForecastDailyDataChanged } from 'src/app/model/interfaces/ITypedChange
 
 @Component({
   selector: 'app-forecast-daily-details',
-  templateUrl: './forecast-daily-details.component.html',
-  styleUrls: ['./forecast-daily-details.component.scss'],
+  templateUrl: './weekly-daily-details.component.html',
+  styleUrls: ['./weekly-daily-details.component.scss'],
 })
-export class ForecastDailyDetailsComponent implements OnInit {
+export class WeeklyDailyDetailsComponent implements OnInit {
   @Input() dailyData!: IDaily;
   @Input() commonMetaData!: ICommon;
 

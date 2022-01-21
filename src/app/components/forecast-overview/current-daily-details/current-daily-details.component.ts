@@ -3,10 +3,10 @@ import { IFullWeatherCity } from 'src/app/model/interfaces/IFullWeatherCity';
 
 @Component({
   selector: 'app-daily-details',
-  templateUrl: './daily-details.component.html',
-  styleUrls: ['./daily-details.component.scss'],
+  templateUrl: './current-daily-details.component.html',
+  styleUrls: ['./current-daily-details.component.scss'],
 })
-export class DailyDetailsComponent implements OnInit {
+export class CurrentDailyDetailsComponent implements OnInit {
   @Input() fullCity!: IFullWeatherCity;
   constructor() {}
 

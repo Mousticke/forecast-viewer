@@ -3,6 +3,8 @@
 .description_container {
   @include flex_column();
   @include section_global();
+  @include xOverflow();
+  width: 100%;
   gap: 1rem;
 
   margin-block-start: 1rem;

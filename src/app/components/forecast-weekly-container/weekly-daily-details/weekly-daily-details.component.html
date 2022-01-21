@@ -1,4 +1,4 @@
-<div class="description_container">
+<article class="description_container">
   <div class="description_title_container">
     <h2 class="description_title">
       {{ dailyData.dt | date: "EEEE d MMMM y" }}
@@ -54,7 +54,7 @@
       </div>
     </div>
   </div>
-</div>
+</article>
 
 <ng-template #dailyNotPopulated>No daily data...</ng-template>
 <ng-template #alertNotPopulated>No alert for now</ng-template>

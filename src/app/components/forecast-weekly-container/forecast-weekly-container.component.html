@@ -1,7 +1,7 @@
 <!--Flex container of all days (scrollable x axis)-->
-<div class="week_forecast">
+<section class="week_forecast">
   <!--Card for each days-->
-  <div class="week_forecast_overview">
+  <article class="week_forecast_overview">
     <div class="week_card_container">
       <div
         class="week_card"
@@ -53,7 +53,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </article>
   <!--On click display more information-->
   <app-forecast-daily-details
     #target
@@ -62,4 +62,4 @@
     class="week_forecast_daily_details_container"
     [ngClass]="showDetails ? 'details-display' : 'details-hide'"
   ></app-forecast-daily-details>
-</div>
+</section>

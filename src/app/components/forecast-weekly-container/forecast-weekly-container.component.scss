@@ -55,7 +55,8 @@
     position: relative;
     &.details-display {
       display: flex;
-      width: 100%;
+      width: 80em;
+      align-self: center;
     }
 
     &.details-hide {
