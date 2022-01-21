@@ -1,0 +1,65 @@
+<!--Flex container of all days (scrollable x axis)-->
+<div class="week_forecast">
+  <!--Card for each days-->
+  <div class="week_forecast_overview">
+    <div class="week_card_container">
+      <div
+        class="week_card"
+        *ngFor="let dayCity of fullCity.daily; let i = index"
+        (click)="setDailyIndex(i)"
+        [class.active]="dayCity === clickedDailyData"
+      >
+        <h2 class="weather_date">{{ dayCity.dt | date: "EEEE d" }}</h2>
+        <h3 class="weather_degree">
+          {{ dayCity.temp.day | number: "1.0-0"
+          }}{{ fullCity.metadata.weather_temperature_unit }}
+        </h3>
+
+        <app-image
+          src="assets/{{ dayCity.weather[0].icon }}.svg"
+          alt="weather icon"
+        ></app-image>
+
+        <div class="weather_data">
+          <span class="weather_feeling">
+            Feels like : {{ dayCity.feels_like.day | number: "1.1-1"
+            }}{{ fullCity.metadata.weather_temperature_unit }}
+          </span>
+          <p>
+            <span class="lowest_temperature"
+              >↓{{ dayCity.temp.min | number: "1.0-0"
+              }}{{ fullCity.metadata.weather_temperature_unit }}</span
+            >
+            ~
+            <span class="highest_temperature"
+              >↑{{ dayCity.temp.max | number: "1.0-0"
+              }}{{ fullCity.metadata.weather_temperature_unit }}</span
+            >
+          </p>
+          <p class="weather_main">{{ dayCity.weather[0].main }}</p>
+        </div>
+        <!--Basic weather data-->
+        <div class="light_meteorology_data_container">
+          <div class="icon_container">
+            <i class="wi wi-humidity"></i>
+            <span class="weather_data">{{ dayCity.humidity }}%</span>
+          </div>
+          <div class="icon_container">
+            <i class="wi wi-strong-wind"></i>
+            <span class="weather_data">
+              {{ dayCity.wind_speed }}{{ fullCity.metadata.weather_speed_unit }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--On click display more information-->
+  <app-forecast-daily-details
+    #target
+    [dailyData]="clickedDailyData"
+    [commonMetaData]="fullCity.metadata"
+    class="week_forecast_daily_details_container"
+    [ngClass]="showDetails ? 'details-display' : 'details-hide'"
+  ></app-forecast-daily-details>
+</div>

@@ -1,0 +1,172 @@
+<div class="description_container">
+  <div class="description_title_container">
+    <h2 class="description_title">
+      {{ dailyData.dt | date: "EEEE d MMMM y" }}
+    </h2>
+  </div>
+  <div class="weather_description_container">
+    <div class="weather_description_text">
+      <span
+        *ngIf="
+          dailyData.weather.length > 0;
+          then dailyDescription;
+          else dailyNotPopulated
+        "
+      ></span>
+    </div>
+    <span #dailyHighLow></span>
+  </div>
+
+  <div
+    class="metrology_data_container"
+    [ngTemplateOutlet]="dailyMetrology"
+  ></div>
+  <table class="details_temperatures">
+    <thead>
+      <th></th>
+      <th>Morning</th>
+      <th>Afternoon</th>
+      <th>Evening</th>
+      <th>Night</th>
+    </thead>
+    <span [ngTemplateOutlet]="dailyTableTemperature"></span>
+  </table>
+
+  <div class="details_raiser">
+    <div class="details_raiser_sun-container">
+      <div class="rise">
+        <span>Sunrise</span>
+        <span>{{ dailyData.sunrise | date: "hh:mm a" }}</span>
+      </div>
+      <div class="set">
+        <span>Sunset</span>
+        <span>{{ dailyData.sunset | date: "hh:mm a" }}</span>
+      </div>
+    </div>
+    <div class="details_raiser_moon-container">
+      <div class="rise">
+        <span>Moonrise</span>
+        <span>{{ dailyData.moonrise | date: "hh:mm a" }}</span>
+      </div>
+      <div class="set">
+        <span>Moonset</span>
+        <span>{{ dailyData.moonset | date: "hh:mm a" }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dailyNotPopulated>No daily data...</ng-template>
+<ng-template #alertNotPopulated>No alert for now</ng-template>
+<ng-template #dailyTableNoTemperature>
+  <tr>
+    <td class="title_body">Temperature</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td class="title_body">Feels Like</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+</ng-template>
+
+<ng-template #dailyDescription>
+  <app-image
+    src="assets/{{ dailyData.weather[0].icon }}.svg"
+    alt="weather icon"
+  ></app-image>
+  <p>
+    {{ dailyData.weather[0].description | titlecase }}
+  </p>
+</ng-template>
+
+<ng-template #dailyHighLow
+  ><span class="weather_description_hilo"
+    >The high will be
+    <span class="highest_temperature"
+      >{{ dailyData.temp.max | number: "1.0-0"
+      }}{{ commonMetaData.weather_temperature_unit }}</span
+    >, the low will be
+    <span class="lowest_temperature"
+      >{{ dailyData.temp.min | number: "1.0-0"
+      }}{{ commonMetaData.weather_temperature_unit }}</span
+    ></span
+  ></ng-template
+>
+
+<ng-template #dailyMetrology>
+  <ul class="metrology_list">
+    <li>
+      <i class="wi wi-hail"></i>&nbsp;
+      <span>{{ dailyData.pop | percent }} </span>
+    </li>
+    <li>
+      <i class="wi wi-wind towards-45-deg"></i>&nbsp;
+      <span
+        >{{ dailyData.wind_speed }}
+        {{ commonMetaData.weather_speed_unit }}
+        {{ dailyData.wind_deg }}°</span
+      >
+    </li>
+    <li>
+      <i class="wi wi-barometer"></i>&nbsp;
+      <span>{{ dailyData.pressure }} hPa</span>
+    </li>
+    <li>
+      <i class="wi wi-humidity"></i>&nbsp;
+      <span>{{ dailyData.humidity }} %</span>
+    </li>
+    <li>
+      <i class="wi wi-sunrise"></i>&nbsp;
+      <span>UV: {{ dailyData.uvi }}</span>
+    </li>
+  </ul>
+</ng-template>
+
+<ng-template #dailyTableTemperature>
+  <tbody>
+    <tr>
+      <td class="title_body">Temperature</td>
+      <td>
+        {{ dailyData.temp.morn | number: "1.0-0"
+        }}{{ commonMetaData.weather_temperature_unit }}
+      </td>
+      <td>
+        {{ dailyData.temp.day | number: "1.0-0"
+        }}{{ commonMetaData.weather_temperature_unit }}
+      </td>
+      <td>
+        {{ dailyData.temp.eve | number: "1.0-0"
+        }}{{ commonMetaData.weather_temperature_unit }}
+      </td>
+      <td>
+        {{ dailyData.temp.night | number: "1.0-0"
+        }}{{ commonMetaData.weather_temperature_unit }}
+      </td>
+    </tr>
+    <tr>
+      <td class="title_body">Feels Like</td>
+      <td>
+        {{ dailyData.feels_like.morn | number: "1.0-0"
+        }}{{ commonMetaData.weather_temperature_unit }}
+      </td>
+      <td>
+        {{ dailyData.feels_like.day | number: "1.0-0"
+        }}{{ commonMetaData.weather_temperature_unit }}
+      </td>
+      <td>
+        {{ dailyData.feels_like.eve | number: "1.0-0"
+        }}{{ commonMetaData.weather_temperature_unit }}
+      </td>
+      <td>
+        {{ dailyData.feels_like.night | number: "1.0-0"
+        }}{{ commonMetaData.weather_temperature_unit }}
+      </td>
+    </tr>
+  </tbody>
+</ng-template>

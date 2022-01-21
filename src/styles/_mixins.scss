@@ -34,7 +34,6 @@
 }
 
 @mixin section_container_tablet {
-  @include grid_forecastOverview;
   @include section_global;
 }
 

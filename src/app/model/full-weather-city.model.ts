@@ -129,6 +129,8 @@ export class FullWeatherCity implements IFullWeatherCity {
           pressure: dailies[i].pressure,
           sunrise: new Date(dailies[i].sunrise * 1000).getTime(),
           sunset: new Date(dailies[i].sunset * 1000).getTime(),
+          moonrise: new Date(dailies[i].moonrise * 1000).getTime(),
+          moonset: new Date(dailies[i].moonset * 1000).getTime(),
           temp: {
             day: dailies[i].temp.day,
             night: dailies[i].temp.night,

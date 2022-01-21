@@ -7,6 +7,7 @@
 
   @include landscape_tablet {
     @include section_container_tablet();
+    @include grid_forecastOverview();
   }
 
   & > .weather_overview {
@@ -34,7 +35,10 @@
           }
         }
         & > .icon_container {
-          @include flex_column();
+          display: none;
+          @include portrait_phone {
+            @include flex_column();
+          }
           gap: 0.3em;
           margin-left: auto;
           align-items: center;

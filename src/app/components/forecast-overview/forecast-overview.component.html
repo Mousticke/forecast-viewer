@@ -10,7 +10,10 @@
         </div>
         <p>{{ currentCity.sys.country_code }}</p>
         <div class="icon_container">
-          <img src="assets/{{ currentCity.weather[0].icon }}.svg" />
+          <app-image
+            src="assets/{{ currentCity.weather[0].icon }}.svg"
+            alt="weather icon"
+          ></app-image>
         </div>
       </div>
       <!--Longitude Latitude-->
@@ -37,12 +40,12 @@
           </span>
           <div class="weather_temperature_boundary">
             <span class="lowest_temperature"
-              >{{ currentCity.main.temp_min | number: "1.1-1"
+              >↓{{ currentCity.main.temp_min | number: "1.1-1"
               }}{{ currentCity.metadata.weather_temperature_unit }}</span
             >
-            <span class="temperature__limiter">/</span>
+            <span class="temperature__limiter">~</span>
             <span class="highest_temperature"
-              >{{ currentCity.main.temp_max | number: "1.1-1"
+              >↑{{ currentCity.main.temp_max | number: "1.1-1"
               }}{{ currentCity.metadata.weather_temperature_unit }}</span
             >
           </div>
@@ -74,15 +77,19 @@
       >
         <h5>{{ dayCity.dt | date: "EEE" }}</h5>
         <!--<i class="wi wi-night-sleet"></i>-->
-        <img src="assets/{{ dayCity.weather[0].icon }}.svg" />
+        <app-image
+          src="assets/{{ dayCity.weather[0].icon }}.svg"
+          alt="weather icon"
+        ></app-image>
+
         <p>
           <span class="lowest_temperature"
-            >{{ dayCity.temp.min | number: "1.0-0"
+            >↓{{ dayCity.temp.min | number: "1.0-0"
             }}{{ fullCity.metadata.weather_temperature_unit }}</span
           >
-          /
+          ~
           <span class="highest_temperature"
-            >{{ dayCity.temp.max | number: "1.0-0"
+            >↑{{ dayCity.temp.max | number: "1.0-0"
             }}{{ fullCity.metadata.weather_temperature_unit }}</span
           >
         </p>

@@ -1,0 +1,66 @@
+@import "/src/styles.scss";
+
+.week_forecast {
+  @include flex_column();
+  position: relative;
+  width: 90%;
+
+  &_overview {
+    @include xOverflow();
+    & > .week_card_container {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(200px, 250px));
+      grid-gap: 1rem;
+      margin: 1rem;
+
+      & > .week_card {
+        transition: all 250ms cubic-bezier(0.645, 0.045, 0.355, 1);
+        @include section_container_small();
+        align-items: center;
+        transform: scale(0.95);
+
+        & > .weather_date {
+          font-size: 1.5rem;
+          margin: unset;
+        }
+        & > .weather_degree {
+          font-size: 2.5rem;
+          margin-block-start: 1rem;
+        }
+
+        & > .weather_data {
+          @include flex_column();
+          justify-content: center;
+          align-items: center;
+        }
+
+        & > .light_meteorology_data_container {
+          display: flex;
+          justify-content: center;
+          gap: 0.3rem;
+        }
+
+        &:hover,
+        &.active {
+          cursor: pointer;
+          box-shadow: var(--cyan) 0px 0px 10px 0px;
+          transform: scale(1);
+        }
+      }
+    }
+  }
+
+  &_daily_details_container {
+    @include flex_column();
+    position: relative;
+    &.details-display {
+      display: flex;
+      width: 100%;
+    }
+
+    &.details-hide {
+      display: none;
+      width: 0;
+    }
+  }
+}

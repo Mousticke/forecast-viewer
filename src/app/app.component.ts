@@ -34,7 +34,7 @@ export class AppComponent {
     /*this.searchFullCityData(undefined, undefined, ['hourly']);
     this.searchLightCityData();*/
 
-    this.searchComplete(undefined, undefined, '', ['hourly']).subscribe(
+    this.searchComplete(undefined, undefined, '', ['minutely']).subscribe(
       (data) => {
         this.populateAllCityData(data.currentCity, data.fullCity);
       }

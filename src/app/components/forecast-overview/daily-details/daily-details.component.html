@@ -87,7 +87,10 @@
 </ng-template>
 
 <ng-template #dailyDescription>
-  <img src="assets/{{ fullCity.daily[0].weather[0].icon }}.svg" />
+  <app-image
+    src="assets/{{ fullCity.daily[0].weather[0].icon }}.svg"
+    alt="weather icon"
+  ></app-image>
   <p>
     {{ fullCity.daily[0].weather[0].description | titlecase }}
   </p>

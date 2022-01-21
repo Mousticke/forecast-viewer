@@ -10,6 +10,8 @@ export interface IDaily {
   humidity: number;
   pop: number;
   pressure: number;
+  moonrise: number;
+  moonset: number;
   sunrise: number;
   sunset: number;
   temp: IFullTemp;
