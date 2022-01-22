@@ -15,6 +15,7 @@ import { WeatherCityService } from './services/weather-city.service';
 import { AppLoaderComponent } from './shared/app-loader/app-loader.component';
 import { NgChartsModule } from 'ng2-charts';
 import { DatePipe } from '@angular/common';
+import { LocationService } from './services/location.service';
 
 export const customElements = [AppImageComponent];
 

@@ -2,14 +2,16 @@
   Weather Forecast Front-End
 </h1>
 <p align="center">
-  Play with <a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a> api with <a href="https://angular.io/start" target="_blank">Angular 13</a> and hosted with <a href="https://pages.github.com/" target="_blank">Github pages</a>
+  Play with <a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a> api with <a href="https://angular.io/start" target="_blank">Angular 13</a> and hosted with <a href="https://vercel.com/" target="_blank">Vercel</a>
 </p>
+
+[![Angular Badge](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)]() ![Vercel](https://vercelbadge.vercel.app/api/mousticke/forecast-viewer?style=for-the-badge)
 
 ![demo](https://raw.githubusercontent.com/Mousticke/forecast-viewer/main/src/assets/appforecast.png)
 
-## 🛠️ Installation & Set Up
+## 🛠️ Installation & Setup
 
-1. Install Angular 13
+1. Install Angular
 
    ```sh
    npm install -g @angular/cli
@@ -73,3 +75,6 @@
 | lightGray  | ![hsl(220deg 100% 99%)](https://via.placeholder.com/10/fafcff?text=+) `hsl(220deg 100% 99%)`             |
 | grayBlue   | ![hsl(215deg 29% 16%)](https://via.placeholder.com/10/1d2735?text=+) `hsl(215deg 29% 16%)`               |
 | gray       | ![hsl(0deg 0% 100% / 18%)](https://via.placeholder.com/10/ffffff2e?text=+) `hsl(0deg 0% 100% / 18%)`     |
+
+[owner]: Mousticke
+[reponame]: forecast-viewer

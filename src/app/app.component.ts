@@ -26,6 +26,7 @@ export class AppComponent {
   public weatherCityData: CurrentWeatherCity;
   public weatherCityFullData: FullWeatherCity;
   public chartDataForecasts: IChartForecastData;
+  public loading$ = this.loaderService.loading$;
 
   private searchCityStream = new Subject<string>();
   private searchGeoStream = new Subject<ICoord>();
@@ -56,7 +57,6 @@ export class AppComponent {
 
     this.searchCityStream.pipe(this.debounceSearchCity()).subscribe({
       next: (data) => {
-        this.loaderService.isLoading.next(true);
         this.populateAllCityData(data.currentCity, data.fullCity);
       },
       error: (err) => {
