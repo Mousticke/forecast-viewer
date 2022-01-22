@@ -2,10 +2,10 @@
   Weather Forecast Front-End
 </h1>
 <p align="center">
-  Play with <a href="https://openweathermap.org/" target="_blank">openweathermap</a> api with <a href="https://angular.io/start" target="_blank">Angular 13</a> and hosted with <a href="https://www.netlify.com/" target="_blank">Github pages</a>
+  Play with <a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a> api with <a href="https://angular.io/start" target="_blank">Angular 13</a> and hosted with <a href="https://pages.github.com/" target="_blank">Github pages</a>
 </p>
 
-![demo]()
+![demo](https://raw.githubusercontent.com/Mousticke/forecast-viewer/main/src/assets/appforecast.png)
 
 ## 🛠️ Installation & Set Up
 
