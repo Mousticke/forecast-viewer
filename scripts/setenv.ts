@@ -43,6 +43,16 @@ const setEnv = () => {
     }
     console.log(`Set variables to ${envTargetFile}`);
   });
+  writeFile(
+    './src/environments/environment.ts',
+    envContent,
+    function (err: any) {
+      if (err) {
+        console.log(err);
+      }
+      console.log(`Set variables to ${envTargetFile}`);
+    }
+  );
 };
 
 setEnv();
