@@ -137,14 +137,15 @@ export class AppComponent {
   }
 
   private populateCurrentCityData(currentCity: any) {
-    this.weatherCityData.setCoord(currentCity.coord.lon, currentCity.coord.lat);
-    this.weatherCityData.setWeather(
+    let newWetherCityData = new CurrentWeatherCity();
+    newWetherCityData.setCoord(currentCity.coord.lon, currentCity.coord.lat);
+    newWetherCityData.setWeather(
       currentCity.weather[0].id,
       currentCity.weather[0].main,
       currentCity.weather[0].description,
       currentCity.weather[0].icon
     );
-    this.weatherCityData.setMain(
+    newWetherCityData.setMain(
       currentCity.main.temp,
       currentCity.main.feels_like,
       currentCity.main.temp_min,
@@ -152,22 +153,27 @@ export class AppComponent {
       currentCity.main.pressure,
       currentCity.main.humidity
     );
-    this.weatherCityData.setWind(currentCity.wind.speed, currentCity.wind.deg);
-    this.weatherCityData.setName(currentCity.name);
-    this.weatherCityData.setSys(
+    newWetherCityData.setWind(currentCity.wind.speed, currentCity.wind.deg);
+    newWetherCityData.setName(currentCity.name);
+    newWetherCityData.setSys(
       currentCity.sys.country,
       currentCity.sys.sunrise,
       currentCity.sys.sunset
     );
-    this.weatherCityData.setDataTime(currentCity.dt, currentCity.timezone);
+    newWetherCityData.setDataTime(currentCity.dt, currentCity.timezone);
+
+    this.weatherCityData = newWetherCityData;
   }
 
   private populateCityFullData(fullCity: any) {
-    this.weatherCityFullData.setAlert(fullCity.alerts);
-    this.weatherCityFullData.setCurrent(fullCity.current);
-    this.weatherCityFullData.setDaily(fullCity.daily);
-    this.weatherCityFullData.setHourly(fullCity.hourly);
-    this.weatherCityFullData.setMetaData(fullCity.timezone_offset);
+    let newFullCityData = new FullWeatherCity();
+    newFullCityData.setAlert(fullCity.alerts);
+    newFullCityData.setCurrent(fullCity.current);
+    newFullCityData.setDaily(fullCity.daily);
+    newFullCityData.setHourly(fullCity.hourly);
+    newFullCityData.setMetaData(fullCity.timezone_offset);
+
+    this.weatherCityFullData = newFullCityData;
   }
 
   /*searchLightCityData(lon?: number, lat?: number, city?: string) {

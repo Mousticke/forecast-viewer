@@ -57,11 +57,13 @@
       display: flex;
       width: 80em;
       align-self: center;
+      margin-block-start: 1rem;
     }
 
     &.details-hide {
       display: none;
       width: 0;
+      margin-block-start: 0rem;
     }
   }
 }

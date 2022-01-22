@@ -16,7 +16,5 @@ export class WeeklyDailyDetailsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  ngOnChanges(changes: IForecastDailyDataChanged) {
-    console.log(changes.dailyData.currentValue);
-  }
+  ngOnChanges(changes: IForecastDailyDataChanged) {}
 }
