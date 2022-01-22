@@ -6,6 +6,7 @@
     "config": "npx ts-node ./scripts/setenv.ts",
     "start": "npm run config -- --env=dev && ng serve",
     "build": "npm run config -- --env=prod && ng build",
+    "prod": "npm run config -- --env=prod && ng serve --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

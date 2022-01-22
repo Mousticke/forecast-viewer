@@ -74,3 +74,25 @@
     background: var(--deepBlue);
   }
 }
+
+@mixin caretDisplay() {
+  & > .to_forward::before {
+    font-family: "fontawesome";
+    content: "\f107";
+    margin-right: 0.5rem;
+    @include breakpoints.landscape_tablet {
+      padding: 0rem 0.5rem;
+      content: "\f105";
+    }
+  }
+
+  & > .to_opposite::before {
+    font-family: "fontawesome";
+    content: "\f106";
+    margin-right: 0.5rem;
+    @include breakpoints.landscape_tablet {
+      padding: 0rem 0.5rem;
+      content: "\f104";
+    }
+  }
+}
