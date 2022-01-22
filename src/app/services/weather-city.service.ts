@@ -1,20 +1,41 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpParams,
+  HttpRequest,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { map, Observable, switchMap } from 'rxjs';
+import { finalize, map, Observable, switchMap } from 'rxjs';
 import { ICurrentWeatherCity } from '../model/interfaces/ICurrentWeatherCity';
 import { LocationService } from './location.service';
 import { ICoord } from '../model/interfaces/ICoord';
 import { IFullWeatherCity } from '../model/interfaces/IFullWeatherCity';
+import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class WeatherCityService {
+export class WeatherCityService implements HttpInterceptor {
   constructor(
     private http: HttpClient,
-    private browserLocationService: LocationService
+    private browserLocationService: LocationService,
+    private loaderService: LoaderService
   ) {}
+
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    this.loaderService.isLoading.next(true);
+    return next.handle(req).pipe(
+      finalize(() => {
+        this.loaderService.isLoading.next(false);
+      })
+    );
+  }
 
   getCurrentLocationWeather(): Observable<ICurrentWeatherCity> {
     const baseUrl = environment.baseUrlOpenWeather;

@@ -111,6 +111,8 @@
     margin-block-start: 2rem;
     margin-block-end: 2rem;
     background: var(--blackyBlue);
+    backdrop-filter: blur(11px) saturate(120%);
+    -webkit-backdrop-filter: blur(11px) saturate(120%);
     padding: 1rem;
     border-radius: 10px;
     margin: auto;

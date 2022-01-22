@@ -65,6 +65,9 @@
       else dailyNotPopulated
     "
   ></div>
+  <app-chart-container
+    [chartForecastDataObs]="chartHourStream.asObservable()"
+  ></app-chart-container>
 </div>
 
 <ng-template #dailyNotPopulated>No daily data...</ng-template>

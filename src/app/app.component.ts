@@ -7,10 +7,14 @@ import {
   Subject,
   switchMap,
 } from 'rxjs';
+import { ChartForecast } from './model/chart-forecast.model';
 import { CurrentWeatherCity } from './model/current-weather-city.model';
 import { FullWeatherCity } from './model/full-weather-city.model';
+import { IChartForecastData } from './model/interfaces/IChartForecastData';
 import { ICoord } from './model/interfaces/ICoord';
 import { ICurrentWeatherCity } from './model/interfaces/ICurrentWeatherCity';
+import { IDaily } from './model/interfaces/IDaily';
+import { LoaderService } from './services/loader.service';
 import { WeatherCityService } from './services/weather-city.service';
 
 @Component({
@@ -21,19 +25,29 @@ import { WeatherCityService } from './services/weather-city.service';
 export class AppComponent {
   public weatherCityData: CurrentWeatherCity;
   public weatherCityFullData: FullWeatherCity;
+  public chartDataForecasts: IChartForecastData;
 
   private searchCityStream = new Subject<string>();
   private searchGeoStream = new Subject<ICoord>();
+  public chartStream = new Subject<IChartForecastData>();
 
-  constructor(private weatherCityService: WeatherCityService) {
+  constructor(
+    private weatherCityService: WeatherCityService,
+    public loaderService: LoaderService
+  ) {
     this.weatherCityData = new CurrentWeatherCity();
     this.weatherCityFullData = new FullWeatherCity();
+    this.chartDataForecasts = new ChartForecast(
+      new Array<number>(0),
+      new Array<number>(0),
+      new Array<number>(0),
+      new Array<number>(0),
+      new Array<number>(0),
+      '°C'
+    );
   }
 
   ngOnInit() {
-    /*this.searchFullCityData(undefined, undefined, ['hourly']);
-    this.searchLightCityData();*/
-
     this.searchComplete(undefined, undefined, '', ['minutely']).subscribe(
       (data) => {
         this.populateAllCityData(data.currentCity, data.fullCity);
@@ -42,6 +56,7 @@ export class AppComponent {
 
     this.searchCityStream.pipe(this.debounceSearchCity()).subscribe({
       next: (data) => {
+        this.loaderService.isLoading.next(true);
         this.populateAllCityData(data.currentCity, data.fullCity);
       },
       error: (err) => {
@@ -79,7 +94,7 @@ export class AppComponent {
         }),
         switchMap((cityName: string) => {
           return this.searchComplete(undefined, undefined, cityName, [
-            'hourly',
+            'minutely',
           ]);
         })
       );
@@ -134,6 +149,30 @@ export class AppComponent {
   private populateAllCityData(currentCity: any, fullCity: any) {
     this.populateCurrentCityData(currentCity);
     this.populateCityFullData(fullCity);
+
+    let temp_mins: number[] = new Array<number>(0);
+    let temp_maxs: number[] = new Array<number>(0);
+    let forecasts: number[] = new Array<number>(0);
+    let pops: number[] = new Array<number>(0);
+    let dates: number[] = new Array<number>(0);
+    this.weatherCityFullData.daily.forEach((day: IDaily) => {
+      temp_maxs.push(day.temp.max);
+      temp_mins.push(day.temp.min);
+      forecasts.push(day.temp.day);
+      pops.push(day.pop);
+      dates.push(day.dt);
+    });
+
+    this.chartStream.next(
+      new ChartForecast(
+        dates,
+        temp_mins,
+        temp_maxs,
+        forecasts,
+        pops,
+        this.weatherCityFullData.metadata.weather_temperature_unit
+      )
+    );
   }
 
   private populateCurrentCityData(currentCity: any) {
@@ -161,7 +200,6 @@ export class AppComponent {
       currentCity.sys.sunset
     );
     newWetherCityData.setDataTime(currentCity.dt, currentCity.timezone);
-
     this.weatherCityData = newWetherCityData;
   }
 
@@ -172,23 +210,6 @@ export class AppComponent {
     newFullCityData.setDaily(fullCity.daily);
     newFullCityData.setHourly(fullCity.hourly);
     newFullCityData.setMetaData(fullCity.timezone_offset);
-
     this.weatherCityFullData = newFullCityData;
   }
-
-  /*searchLightCityData(lon?: number, lat?: number, city?: string) {
-    this.weatherCityService
-      .getLightLocationWeather(lon, lat, city)
-      .subscribe((data: any) => {
-        this.populateCurrentCityData(data);
-      });
-  }
-
-  searchFullCityData(lon?: number, lat?: number, exclusion?: Array<string>) {
-    this.weatherCityService
-      .getLocationWeather(lon, lat, exclusion)
-      .subscribe((data: any) => {
-        this.populateCityFullData(data);
-      });
-  }*/
 }

@@ -9,4 +9,6 @@
 <app-forecast-weekly-container
   [fullCity]="weatherCityFullData"
 ></app-forecast-weekly-container>
-<app-chart-container></app-chart-container>
+<app-chart-container
+  [chartForecastDataObs]="chartStream.asObservable()"
+></app-chart-container>

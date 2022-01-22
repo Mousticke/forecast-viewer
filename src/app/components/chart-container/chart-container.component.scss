@@ -1,0 +1,20 @@
+@import "/src/styles.scss";
+
+.chart_container {
+  @include flex_row();
+  @include xOverflow();
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin: 0rem 1rem;
+  & > .chart {
+    position: relative;
+    min-height: unset;
+    width: 100%;
+    max-width: 1000px;
+
+    @include giant_desktop {
+      max-width: 1500px;
+    }
+  }
+}
