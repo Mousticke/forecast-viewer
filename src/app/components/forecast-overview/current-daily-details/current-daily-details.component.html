@@ -29,15 +29,6 @@
       "
     ></span>
   </div>
-
-  <div
-    class="metrology_data_container"
-    *ngIf="
-      fullCity.daily.length > 0;
-      then dailyMetrology;
-      else dailyNotPopulated
-    "
-  ></div>
   <table class="details_temperatures">
     <thead>
       <th></th>
@@ -65,6 +56,15 @@
       <span>{{ fullCity.current.sunset | date: "hh:mm a" }}</span>
     </div>
   </div>
+
+  <div
+    class="metrology_data_container"
+    *ngIf="
+      fullCity.daily.length > 0;
+      then dailyMetrology;
+      else dailyNotPopulated
+    "
+  ></div>
 </div>
 
 <ng-template #dailyNotPopulated>No daily data...</ng-template>

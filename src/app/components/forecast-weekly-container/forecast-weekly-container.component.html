@@ -14,17 +14,16 @@
           {{ dayCity.temp.day | number: "1.0-0"
           }}{{ fullCity.metadata.weather_temperature_unit }}
         </h3>
-
-        <app-image
-          src="assets/{{ dayCity.weather[0].icon }}.svg"
-          alt="weather icon"
-        ></app-image>
-
         <div class="weather_data">
+          <p class="weather_main">{{ dayCity.weather[0].main }}</p>
           <span class="weather_feeling">
             Feels like : {{ dayCity.feels_like.day | number: "1.1-1"
             }}{{ fullCity.metadata.weather_temperature_unit }}
           </span>
+          <app-image
+            src="assets/{{ dayCity.weather[0].icon }}.svg"
+            alt="weather icon"
+          ></app-image>
           <p>
             <span class="lowest_temperature"
               >↓{{ dayCity.temp.min | number: "1.0-0"
@@ -36,8 +35,8 @@
               }}{{ fullCity.metadata.weather_temperature_unit }}</span
             >
           </p>
-          <p class="weather_main">{{ dayCity.weather[0].main }}</p>
         </div>
+
         <!--Basic weather data-->
         <div class="light_meteorology_data_container">
           <div class="icon_container">

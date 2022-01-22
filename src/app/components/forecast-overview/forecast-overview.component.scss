@@ -22,16 +22,19 @@
 
         & > .country_info_container {
           @include flex_column();
-          gap: 0.5rem;
+          gap: 0.3rem;
           & > .country_name {
             font-size: 2.5rem;
             font-weight: 600;
             padding-inline-end: 0.3em;
             margin: unset;
           }
-          & > .weather_data {
-            font-size: 1.1rem;
-            font-weight: 600;
+
+          & > .country_lonlat_container {
+            display: flex;
+            gap: 0.5em;
+            margin-block-end: 0.5rem;
+            margin-block-start: 0.5rem;
           }
         }
         & > .icon_container {
@@ -47,13 +50,6 @@
             font-weight: 500;
           }
         }
-      }
-
-      & > .country_lonlat_container {
-        display: flex;
-        gap: 0.5em;
-        margin-block-end: 0.5rem;
-        margin-block-start: 0.5rem;
       }
 
       & > .weather_date_container {
@@ -72,6 +68,11 @@
             font-size: 4rem;
             font-weight: 400;
             margin: unset;
+          }
+
+          & > .weather_data {
+            font-size: 1.1rem;
+            font-weight: 600;
           }
 
           & > .weather_temperature_boundary {
@@ -109,6 +110,11 @@
     @include flex_column();
     margin-block-start: 2rem;
     margin-block-end: 2rem;
+    background: var(--blackyBlue);
+    padding: 1rem;
+    border-radius: 10px;
+    margin: auto;
+    width: 100%;
     & > .forecast_list_container {
       display: flex;
       justify-content: space-around;

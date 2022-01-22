@@ -6,7 +6,17 @@
       <div class="country_container">
         <div class="country_info_container">
           <h2 class="country_name">{{ currentCity.name }}</h2>
-          <span class="weather_data">{{ currentCity.weather[0].main }}</span>
+
+          <div class="country_lonlat_container">
+            <p>lon : {{ currentCity.coord.lon }}</p>
+            <p>lat : {{ currentCity.coord.lat }}</p>
+          </div>
+          <!--Date from API-->
+          <div class="weather_date_container">
+            <p class="weather__date">
+              {{ currentCity.unix_data_time | date: "MMM d y, hh:mm a" }}
+            </p>
+          </div>
         </div>
         <p>{{ currentCity.sys.country_code }}</p>
         <div class="icon_container">
@@ -17,16 +27,7 @@
         </div>
       </div>
       <!--Longitude Latitude-->
-      <div class="country_lonlat_container">
-        <p>lon : {{ currentCity.coord.lon }}</p>
-        <p>lat : {{ currentCity.coord.lat }}</p>
-      </div>
-      <!--Date from API-->
-      <div class="weather_date_container">
-        <p class="weather__date">
-          {{ currentCity.unix_data_time | date: "MMM d y, hh:mm a" }}
-        </p>
-      </div>
+
       <!--Temperature-->
       <div class="current_country_temperature_container">
         <div class="weather_degree_container">
@@ -34,6 +35,7 @@
             {{ currentCity.main.temp | number: "1.0-0"
             }}{{ currentCity.metadata.weather_temperature_unit }}
           </h2>
+          <span class="weather_data">{{ currentCity.weather[0].main }}</span>
           <span class="weather_feeling">
             Feels like : {{ currentCity.main.feels_like | number: "1.1-1"
             }}{{ currentCity.metadata.weather_temperature_unit }}
