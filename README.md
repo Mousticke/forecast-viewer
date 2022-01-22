@@ -11,7 +11,7 @@
 
 ## 🛠️ Installation & Set Up
 
-1. Install Angular 13
+1. Install Angular
 
    ```sh
    npm install -g @angular/cli
