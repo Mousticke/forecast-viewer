@@ -2,7 +2,7 @@
 
 .section__container {
   @include section_container_small();
-  transition: all 0.8s cubic-bezier(1, 0, 0.58, 1);
+  transition: all 0.2s cubic-bezier(1, 0, 0.58, 1);
   @include xOverflow();
 
   @include landscape_tablet {
