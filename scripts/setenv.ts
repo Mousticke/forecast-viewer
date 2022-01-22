@@ -37,12 +37,6 @@ const setEnv = () => {
       baseUrlOpenWeather: 'https://api.openweathermap.org/data/2.5',
     }; `;
 
-  writeFile(envTargetFile, envContent, function (err: any) {
-    if (err) {
-      console.log(err);
-    }
-    console.log(`Set variables to ${envTargetFile}`);
-  });
   writeFile(
     './src/environments/environment.ts',
     envContent,
