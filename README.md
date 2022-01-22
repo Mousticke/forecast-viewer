@@ -9,7 +9,7 @@
 
 ![demo](https://raw.githubusercontent.com/Mousticke/forecast-viewer/main/src/assets/appforecast.png)
 
-## 🛠️ Installation & Set Up
+## 🛠️ Installation & Setup
 
 1. Install Angular
 
