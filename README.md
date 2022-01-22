@@ -4,6 +4,7 @@
 <p align="center">
   Play with <a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a> api with <a href="https://angular.io/start" target="_blank">Angular 13</a> and hosted with <a href="https://vercel.com/" target="_blank">Vercel</a>
 </p>
+
 ![Vercel](https://vercelbadge.vercel.app/api/mousticke/forecast-viewer?style=for-the-badge)
 
 ![demo](https://raw.githubusercontent.com/Mousticke/forecast-viewer/main/src/assets/appforecast.png)
