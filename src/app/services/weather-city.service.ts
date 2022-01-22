@@ -29,10 +29,10 @@ export class WeatherCityService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    this.loaderService.isLoading.next(true);
+    this.loaderService.show();
     return next.handle(req).pipe(
       finalize(() => {
-        this.loaderService.isLoading.next(false);
+        this.loaderService.hide();
       })
     );
   }

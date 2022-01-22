@@ -2,13 +2,24 @@
   (cityFormEvent)="cityForm($event)"
   (geoFormEvent)="geoForm($event)"
 ></app-weather-search>
-<app-forecast-overview
-  [currentCity]="weatherCityData"
-  [fullCity]="weatherCityFullData"
-></app-forecast-overview>
-<app-forecast-weekly-container
-  [fullCity]="weatherCityFullData"
-></app-forecast-weekly-container>
-<app-chart-container
-  [chartForecastDataObs]="chartStream.asObservable()"
-></app-chart-container>
+
+<div
+  *ngIf="loading$ | async; then LoadingTemplate; else AppForecastTemplate"
+></div>
+
+<ng-template #LoadingTemplate>
+  <app-loader *ngIf="loading$ | async"></app-loader>
+</ng-template>
+
+<ng-template #AppForecastTemplate>
+  <app-forecast-overview
+    [currentCity]="weatherCityData"
+    [fullCity]="weatherCityFullData"
+  ></app-forecast-overview>
+  <app-forecast-weekly-container
+    [fullCity]="weatherCityFullData"
+  ></app-forecast-weekly-container>
+  <app-chart-container
+    [chartForecastDataObs]="chartStream.asObservable()"
+  ></app-chart-container>
+</ng-template>
