@@ -1,17 +1,18 @@
-@import "/src/styles.scss";
+@use "/src/styles/mixins";
+@use "/src/styles/breakpoints";
 
 .week_forecast {
-  @include flex_column();
+  @include mixins.flex_column();
   position: relative;
   width: 90%;
 
-  @include wide_desktop() {
+  @include breakpoints.wide_desktop() {
     align-items: center;
   }
   &_overview {
-    @include flex_row();
-    @include xOverflow();
-    @include wide_desktop() {
+    @include mixins.flex_row();
+    @include mixins.xOverflow();
+    @include breakpoints.wide_desktop() {
       justify-content: center;
     }
     & > .week_card_container {
@@ -22,7 +23,7 @@
 
       & > .week_card {
         transition: all 250ms cubic-bezier(0.645, 0.045, 0.355, 1);
-        @include section_container_small();
+        @include mixins.section_container_small();
         align-items: center;
         transform: scale(0.95);
 
@@ -37,7 +38,7 @@
         }
 
         & > .weather_data {
-          @include flex_column();
+          @include mixins.flex_column();
           justify-content: center;
           align-items: center;
         }
@@ -59,11 +60,12 @@
   }
 
   &_daily_details_container {
-    @include flex_column();
+    @include mixins.flex_column();
     position: relative;
     &.details-display {
       display: flex;
-      width: 80em;
+      width: 100%;
+      max-width: 80em;
       align-self: center;
       margin-block-start: 1rem;
     }

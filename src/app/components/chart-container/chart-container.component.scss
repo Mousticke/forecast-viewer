@@ -1,8 +1,9 @@
-@import "/src/styles.scss";
+@use "/src/styles/mixins";
+@use "/src/styles/breakpoints";
 
 .chart_container {
-  @include flex_row();
-  @include xOverflow();
+  @include mixins.flex_row();
+  @include mixins.xOverflow();
   justify-content: center;
   position: relative;
   width: 100%;
@@ -13,7 +14,7 @@
     width: 100%;
     max-width: 1000px;
 
-    @include giant_desktop {
+    @include breakpoints.giant_desktop {
       max-width: 1500px;
     }
   }

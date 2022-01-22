@@ -1,3 +1,5 @@
+@use "/src/styles/breakpoints";
+
 @mixin flex_column {
   display: flex;
   flex-direction: column;
@@ -22,7 +24,7 @@
 @mixin grid_forecastOverview {
   display: grid;
   grid-template-columns: minmax(350px, 1fr) auto;
-  @include desktop {
+  @include breakpoints.desktop {
     grid-template-columns: minmax(350px, 500px) auto;
   }
   grid-template-rows: 1fr auto;

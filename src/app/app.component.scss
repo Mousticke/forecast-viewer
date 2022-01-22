@@ -1,7 +1,8 @@
-@import "/src/styles.scss";
+@use "/src/styles/mixins";
+@use "/src/styles/breakpoints";
 
 app-weather-search {
-  @include flex_column();
+  @include mixins.flex_column();
   justify-content: center;
   margin: 1rem;
 }
@@ -13,7 +14,7 @@ app-forecast-overview {
   grid-template-rows: 1fr;
   max-width: 90vw;
 
-  @include landscape_tablet {
+  @include breakpoints.landscape_tablet {
     place-items: center;
   }
 }

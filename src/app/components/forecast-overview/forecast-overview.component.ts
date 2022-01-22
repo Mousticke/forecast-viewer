@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CurrentWeatherCity } from 'src/app/model/current-weather-city.model';
 import { FullWeatherCity } from 'src/app/model/full-weather-city.model';
 import { ICurrentWeatherCity } from 'src/app/model/interfaces/ICurrentWeatherCity';

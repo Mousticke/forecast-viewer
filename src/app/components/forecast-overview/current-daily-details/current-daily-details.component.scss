@@ -1,8 +1,9 @@
+@use "/src/styles/breakpoints";
 @import "src/styles/daily_details.scss";
 
 app-chart-container {
   width: 100%;
-  @include landscape_tablet {
+  @include breakpoints.landscape_tablet {
     max-width: 60vw;
   }
 }

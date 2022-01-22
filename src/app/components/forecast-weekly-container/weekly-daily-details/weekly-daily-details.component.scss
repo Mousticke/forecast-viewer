@@ -1,12 +1,13 @@
+@use "/src/styles/mixins";
 @import "src/styles/daily_details.scss";
 
 .description_container {
-  @include section_global();
-  @include xOverflow();
+  @include mixins.section_global();
+  @include mixins.xOverflow();
   width: 100%;
 
   & > .details_raiser {
-    @include flex_row();
+    @include mixins.flex_row();
     align-items: center;
     margin-block-end: 1rem;
     & .details_raiser_sun-container,

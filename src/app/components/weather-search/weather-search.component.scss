@@ -1,14 +1,15 @@
-@import "/src/styles.scss";
+@use "/src/styles/mixins";
+@use "/src/styles/breakpoints";
 
 .form_container {
-  @include flex_row();
+  @include mixins.flex_row();
   gap: 1rem;
   margin-block-end: 1rem;
 
   & > form {
-    @include flex_column();
-    @include landscape_phone {
-      @include flex_row();
+    @include mixins.flex_column();
+    @include breakpoints.landscape_phone {
+      @include mixins.flex_row();
       align-items: center;
     }
 

@@ -1,27 +1,28 @@
-@import "/src/styles.scss";
+@use "/src/styles/mixins";
+@use "/src/styles/breakpoints";
 
 .section__container {
-  @include section_container_small();
+  @include mixins.section_container_small();
   transition: all 0.2s cubic-bezier(1, 0, 0.58, 1);
-  @include xOverflow();
+  @include mixins.xOverflow();
 
-  @include landscape_tablet {
-    @include section_container_tablet();
-    @include grid_forecastOverview();
+  @include breakpoints.landscape_tablet {
+    @include mixins.section_container_tablet();
+    @include mixins.grid_forecastOverview();
   }
 
   & > .weather_overview {
-    @include flex_row();
+    @include mixins.flex_row();
     justify-content: space-between;
     & > .current_country_data {
-      @include flex_column();
+      @include mixins.flex_column();
       flex: 1;
 
       & > .country_container {
-        @include flex_row();
+        @include mixins.flex_row();
 
         & > .country_info_container {
-          @include flex_column();
+          @include mixins.flex_column();
           gap: 0.3rem;
           & > .country_name {
             font-size: 2.5rem;
@@ -39,8 +40,8 @@
         }
         & > .icon_container {
           display: none;
-          @include portrait_phone {
-            @include flex_column();
+          @include breakpoints.portrait_phone {
+            @include mixins.flex_column();
           }
           gap: 0.3em;
           margin-left: auto;
@@ -53,15 +54,15 @@
       }
 
       & > .weather_date_container {
-        @include flex_row();
+        @include mixins.flex_row();
       }
 
       & > .current_country_temperature_container {
-        @include flex_column();
+        @include mixins.flex_column();
         justify-content: center;
         margin-block-start: 1rem;
         & > .weather_degree_container {
-          @include flex_column();
+          @include mixins.flex_column();
           align-items: center;
 
           & > .weather_degree {
@@ -81,7 +82,7 @@
         }
 
         & > .light_meteorology_data_container {
-          @include flex_row();
+          @include mixins.flex_row();
           justify-content: center;
           gap: 1em;
           font-size: 1.5rem;
@@ -89,7 +90,7 @@
           margin-block-end: 1rem;
           align-items: center;
           & > .icon_container {
-            @include flex_column();
+            @include mixins.flex_column();
             gap: 0.3em;
             align-items: center;
             & > .weather_data {
@@ -101,13 +102,13 @@
       }
     }
 
-    @include landscape_tablet {
+    @include breakpoints.landscape_tablet {
       grid-area: overviewCity;
     }
   }
 
   & > .city_forecast_container {
-    @include flex_column();
+    @include mixins.flex_column();
     margin-block-start: 2rem;
     margin-block-end: 2rem;
     background: var(--blackyBlue);
@@ -138,7 +139,7 @@
       }
     }
 
-    @include landscape_tablet {
+    @include breakpoints.landscape_tablet {
       grid-area: overviewForecast;
     }
   }
@@ -158,7 +159,7 @@
     border-left: none;
     border-top: 1px solid var(--darkNavy);
 
-    @include landscape_tablet {
+    @include breakpoints.landscape_tablet {
       grid-area: forecastCity;
       margin-inline-start: 1rem;
       margin-block-start: 0rem;
@@ -181,7 +182,7 @@
       cursor: pointer;
     }
 
-    @include landscape_tablet {
+    @include breakpoints.landscape_tablet {
       width: auto;
       top: 0rem;
       height: 100%;
@@ -194,7 +195,7 @@
     font-family: "fontawesome";
     content: "\f107";
     margin-right: 0.5rem;
-    @include landscape_tablet {
+    @include breakpoints.landscape_tablet {
       padding: 0rem 0.5rem;
       content: "\f105";
     }
@@ -204,14 +205,14 @@
     font-family: "fontawesome";
     content: "\f106";
     margin-right: 0.5rem;
-    @include landscape_tablet {
+    @include breakpoints.landscape_tablet {
       padding: 0rem 0.5rem;
       content: "\f104";
     }
   }
 
   & > .daily_details_container {
-    @include flex_column();
+    @include mixins.flex_column();
 
     margin-block-end: 0.5rem;
   }
