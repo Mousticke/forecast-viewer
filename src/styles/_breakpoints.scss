@@ -5,6 +5,8 @@ $breakpoints: (
   "landscape_tablet": 801px,
   "small_desktop": 1025px,
   "desktop": 1281px,
+  "giant_desktop": 1921px,
+  "wide_desktop": 2500px,
 );
 
 @mixin portrait_phone {
@@ -37,6 +39,18 @@ $breakpoints: (
 
 @mixin desktop {
   @media (min-width: map-get($breakpoints, "desktop")) {
+    @content;
+  }
+}
+
+@mixin giant_desktop {
+  @media (min-width: map-get($breakpoints, "giant_desktop")) {
+    @content;
+  }
+}
+
+@mixin wide_desktop {
+  @media (min-width: map-get($breakpoints, "wide_desktop")) {
     @content;
   }
 }

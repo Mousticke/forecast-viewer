@@ -4,12 +4,18 @@
   @include flex_column();
   position: relative;
   width: 90%;
-
+  @include xOverflow();
+  @include wide_desktop() {
+    align-items: center;
+  }
   &_overview {
-    @include xOverflow();
+    @include flex_row();
+    @include wide_desktop() {
+      justify-content: center;
+    }
     & > .week_card_container {
       display: grid;
-      grid-template-columns: repeat(8, minmax(200px, 250px));
+      grid-template-columns: repeat(8, minmax(250px, 350px));
       grid-gap: 1rem;
       margin: 1rem;
 

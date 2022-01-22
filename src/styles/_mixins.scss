@@ -22,6 +22,9 @@
 @mixin grid_forecastOverview {
   display: grid;
   grid-template-columns: minmax(350px, 1fr) auto;
+  @include desktop {
+    grid-template-columns: minmax(350px, 500px) auto;
+  }
   grid-template-rows: 1fr auto;
   grid-template-areas:
     "overviewCity forecastCity"
