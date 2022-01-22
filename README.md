@@ -27,7 +27,11 @@
    touch .env
    ```
 
-4. Add your <a href="https://openweathermap.org/" target="_blank">Open Weather</a> API key in the .env file
+4. Add your env values from <a href="https://openweathermap.org/" target="_blank">Open Weather</a> API
+
+`API_KEY` from your Open Weather Account <br />
+`API_UNITS='metric'` or from [Open Weather App Measure](https://openweathermap.org/api/one-call-api#data) <br />
+`API_LANG='en'` or from [Open Weather App Lang](https://openweathermap.org/api/one-call-api#multi)
 
 5. Run your local server. This will populate all your data inside the environment file used by angular.
 
